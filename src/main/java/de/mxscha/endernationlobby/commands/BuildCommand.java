@@ -1,7 +1,7 @@
 package de.mxscha.endernationlobby.commands;
 
-import de.mxscha.lobby.utils.manager.BuildManager;
-import de.mxscha.lobby.utils.manager.MessageManager;
+import de.mxscha.endernationlobby.utils.manager.BuildManager;
+import de.mxscha.endernationlobby.utils.manager.MessageManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

@@ -1,7 +1,7 @@
 package de.mxscha.endernationlobby.commands;
 
-import de.mxscha.lobby.utils.manager.MessageManager;
-import de.mxscha.lobby.utils.manager.locations.ConfigLocationUtil;
+import de.mxscha.endernationlobby.utils.manager.MessageManager;
+import de.mxscha.endernationlobby.utils.manager.locations.ConfigLocationUtil;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

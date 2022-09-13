@@ -1,9 +1,9 @@
 package de.mxscha.endernationlobby.listener;
 
-import de.mxscha.lobby.utils.manager.InventoryManager;
-import de.mxscha.lobby.utils.manager.MessageManager;
-import de.mxscha.lobby.utils.manager.locations.ConfigLocationUtil;
-import de.mxscha.lobby.utils.scoreboards.LobbyScoreboard;
+import de.mxscha.endernationlobby.utils.manager.InventoryManager;
+import de.mxscha.endernationlobby.utils.manager.MessageManager;
+import de.mxscha.endernationlobby.utils.manager.locations.ConfigLocationUtil;
+import de.mxscha.endernationlobby.utils.scoreboards.LobbyScoreboard;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;

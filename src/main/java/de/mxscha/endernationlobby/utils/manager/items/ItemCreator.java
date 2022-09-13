@@ -19,7 +19,7 @@ import java.util.Arrays;
 public class ItemCreator {
 
     /*
-        ItemCreator by Mxscha (NovaGames HeadDev):
+        ItemCreator by Mxscha (EnderNation Dev):
         Version 1.8.9 - 1.19
         How to Use: new ItemCreator(MATERIAL).setName("Name").setLore("Lore").toItemStack();
                                                  |-> you can also add more...         |-> this is required

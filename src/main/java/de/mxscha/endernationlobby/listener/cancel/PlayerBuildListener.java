@@ -1,6 +1,6 @@
 package de.mxscha.endernationlobby.listener.cancel;
 
-import de.mxscha.lobby.utils.manager.BuildManager;
+import de.mxscha.endernationlobby.utils.manager.BuildManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

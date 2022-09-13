@@ -2,11 +2,11 @@ package de.mxscha.endernationlobby.listener.items;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
-import de.mxscha.lobby.LobbyCore;
-import de.mxscha.lobby.utils.PluginMessagesListener;
-import de.mxscha.lobby.utils.manager.MessageManager;
-import de.mxscha.lobby.utils.manager.items.ItemCreator;
-import de.mxscha.lobby.utils.manager.locations.ConfigLocationUtil;
+import de.mxscha.endernationlobby.LobbyCore;
+import de.mxscha.endernationlobby.utils.PluginMessagesListener;
+import de.mxscha.endernationlobby.utils.manager.MessageManager;
+import de.mxscha.endernationlobby.utils.manager.items.ItemCreator;
+import de.mxscha.endernationlobby.utils.manager.locations.ConfigLocationUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;

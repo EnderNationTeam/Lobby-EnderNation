@@ -1,6 +1,6 @@
 package de.mxscha.endernationlobby.utils.manager.locations;
 
-import de.mxscha.lobby.utils.config.LocationsConfig;
+import de.mxscha.endernationlobby.utils.config.LocationsConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;

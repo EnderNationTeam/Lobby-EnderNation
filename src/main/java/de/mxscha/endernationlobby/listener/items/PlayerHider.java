@@ -1,8 +1,8 @@
 package de.mxscha.endernationlobby.listener.items;
 
-import de.mxscha.lobby.LobbyCore;
-import de.mxscha.lobby.utils.manager.MessageManager;
-import de.mxscha.lobby.utils.manager.items.ItemCreator;
+import de.mxscha.endernationlobby.LobbyCore;
+import de.mxscha.endernationlobby.utils.manager.MessageManager;
+import de.mxscha.endernationlobby.utils.manager.items.ItemCreator;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;

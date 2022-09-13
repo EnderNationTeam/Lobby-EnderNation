@@ -1,7 +1,7 @@
 package de.mxscha.endernationlobby.listener.items;
 
 
-import de.mxscha.lobby.utils.manager.items.ItemCreator;
+import de.mxscha.endernationlobby.utils.manager.items.ItemCreator;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

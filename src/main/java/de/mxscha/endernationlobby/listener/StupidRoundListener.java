@@ -1,8 +1,7 @@
 package de.mxscha.endernationlobby.listener;
 
-import de.mxscha.lobby.utils.manager.MessageManager;
-import de.mxscha.lobby.utils.manager.RegionManager;
-import de.mxscha.lobby.utils.manager.locations.ConfigLocationUtil;
+import de.mxscha.endernationlobby.utils.manager.RegionManager;
+import de.mxscha.endernationlobby.utils.manager.locations.ConfigLocationUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

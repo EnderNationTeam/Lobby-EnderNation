@@ -1,6 +1,6 @@
 package de.mxscha.endernationlobby.utils.manager;
 
-import de.mxscha.lobby.utils.manager.items.ItemCreator;
+import de.mxscha.endernationlobby.utils.manager.items.ItemCreator;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;

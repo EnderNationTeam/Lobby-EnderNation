@@ -1,7 +1,7 @@
 package de.mxscha.endernationlobby.listener;
 
-import de.mxscha.lobby.utils.manager.BuildManager;
-import de.mxscha.lobby.utils.manager.locations.ConfigLocationUtil;
+import de.mxscha.endernationlobby.utils.manager.BuildManager;
+import de.mxscha.endernationlobby.utils.manager.locations.ConfigLocationUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
