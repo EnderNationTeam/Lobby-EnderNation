@@ -1,4 +1,4 @@
 name: Endernation Lobby
 version: '${project.version}'
-main: de.mxscha.endernationlobby.EndernationLobby
+main: de.mxscha.endernationlobby.LobbyCore
 api-version: 1.19
