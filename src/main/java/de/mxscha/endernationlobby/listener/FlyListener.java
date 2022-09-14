@@ -12,23 +12,22 @@ import org.bukkit.inventory.ItemStack;
 
 public class FlyListener implements Listener {
 
-    private final ItemStack flyModeA = new ItemCreator(Material.FEATHER).setName("§8» §9Fliegen §8| §aAktiviert").toItemStack();
-    private final ItemStack flyModeD = new ItemCreator(Material.FEATHER).setName("§8» §9Fliegen §8| §cDeaktiviert").toItemStack();
+    private final ItemStack flyModeA = new ItemCreator(Material.FEATHER).setName("§8» §9§lFliegen §8| §aAktiviert").toItemStack();
+    private final ItemStack flyModeD = new ItemCreator(Material.FEATHER).setName("§8» §9§lFliegen §8| §cDeaktiviert").toItemStack();
 
     @EventHandler
     public void onInventory(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        if (event.getClickedInventory() == null) return;
         if (event.getCurrentItem() == null) return;
         if (event.getInventory() == player.getInventory()) {
-            if (event.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §9Fliegen §8| §cDeaktiviert")) {
+            if (event.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §9§lFliegen §8| §cDeaktiviert")) {
                 player.setFlying(true);
                 player.setAllowFlight(true);
                 player.getInventory().setItem(21, flyModeA);
                 player.closeInventory();
                 player.sendMessage(MessageManager.Prefix + "§7Du kannst §anun §7fliegen!");
             }
-            if (event.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §9Fliegen §8| §aAktiviert")) {
+            if (event.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §9§lFliegen §8| §aAktiviert")) {
                 player.setFlying(false);
                 player.setAllowFlight(false);
                 player.getInventory().setItem(21, flyModeD);

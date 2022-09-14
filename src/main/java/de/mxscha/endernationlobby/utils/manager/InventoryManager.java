@@ -18,7 +18,7 @@ public class InventoryManager {
     private static final ItemStack switcher = new ItemCreator(Material.NETHER_STAR).setName("§8» §6§lLobby Wechsler").setLore("§7Wechsle zwischen den Lobbys!").toItemStack();
 
     // Admin items
-    private static final ItemStack flyMode = new ItemCreator(Material.FEATHER).setName("§8» §9Fliegen §8| §cDeaktiviert").toItemStack();
+    private static final ItemStack flyMode = new ItemCreator(Material.FEATHER).setName("§8» §9§lFliegen §8| §cDeaktiviert").toItemStack();
     private static final ItemStack teamServerSwitcher = new ItemCreator(Material.COMMAND_BLOCK_MINECART).setName("§8» §6§lServer Wechsler").toItemStack();
 
     public static void setPlayerInventory(Player player) {
