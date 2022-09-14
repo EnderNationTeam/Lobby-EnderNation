@@ -9,12 +9,19 @@ import de.mxscha.endernationlobby.utils.manager.MessageManager;
 import de.mxscha.endernationlobby.utils.manager.RegionManager;
 import de.mxscha.endernationlobby.utils.manager.locations.ConfigLocationUtil;
 import org.bukkit.Location;
+import org.bukkit.command.defaults.BukkitCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.checkerframework.checker.units.qual.A;
+
+import java.util.ArrayList;
 
 public class PlayerTeleportToGamesListener implements Listener {
+
+    private ArrayList<Player> teleport = new ArrayList<>();
 
     @EventHandler
     public void onMove(PlayerMoveEvent event) {
@@ -29,7 +36,15 @@ public class PlayerTeleportToGamesListener implements Listener {
             ByteArrayDataOutput out;
             if (RegionManager.isInRegion(player.getLocation(), bedwarsA, bedwarsB)) {
                 if (!BuildManager.isAllowed(player)) {
-                    player.sendMessage("du bist in bedwars");
+                    if (!teleport.contains(player)) {
+                        teleport.add(player);
+                        out = ByteStreams.newDataOutput();
+                        out.writeUTF("Connect");
+                        out.writeUTF("BW-1");
+                        player.sendPluginMessage(LobbyCore.getInstance(), "BungeeCord", out.toByteArray());
+                        player.sendMessage(MessageManager.Prefix + "§7Du wurdest zu §b§fBedWars §7gesendet!");
+                        remove(player);
+                    }
                 }
             }
 
@@ -41,15 +56,30 @@ public class PlayerTeleportToGamesListener implements Listener {
 
             if (RegionManager.isInRegion(player.getLocation(), EnfOfLifeA, EndOfLifeB)) {
                 if (!BuildManager.isAllowed(player)) {
-                    out = ByteStreams.newDataOutput();
-                    out.writeUTF("Connect");
-                    out.writeUTF("EndOfLife-1");
-                    player.sendPluginMessage(LobbyCore.getInstance(), "BungeeCord", out.toByteArray());
-                    player.sendMessage(MessageManager.Prefix + "§7Du wurdest zu §9§lEnd§f§lOf§a§lLife §7gesendet!");
+                    if (!teleport.contains(player)) {
+                        teleport.add(player);
+                        out = ByteStreams.newDataOutput();
+                        out.writeUTF("Connect");
+                        out.writeUTF("EndOfLife-1");
+                        player.sendPluginMessage(LobbyCore.getInstance(), "BungeeCord", out.toByteArray());
+                        player.sendMessage(MessageManager.Prefix + "§7Du wurdest zu §9§lEnd§f§lOf§a§lLife §7gesendet!");
+                        remove(player);
+                    }
                 }
             }
         } catch (Exception e) {
 
+        }
+    }
+
+    private void remove(Player player) {
+        if (teleport.contains(player)) {
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    teleport.remove(player);
+                }
+            }.runTaskLater(LobbyCore.getInstance(), 20);
         }
     }
 }

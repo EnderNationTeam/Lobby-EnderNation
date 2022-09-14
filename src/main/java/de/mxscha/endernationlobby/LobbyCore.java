@@ -1,12 +1,8 @@
 package de.mxscha.endernationlobby;
 
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteStreams;
 import de.mxscha.endernationlobby.utils.PluginMessagesListener;
 import de.mxscha.endernationlobby.utils.Register;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.messaging.PluginMessageListener;
 
 public final class LobbyCore extends JavaPlugin {
 
@@ -20,7 +16,6 @@ public final class LobbyCore extends JavaPlugin {
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", new PluginMessagesListener());
     }
-
     @Override
     public void onDisable() {
         this.getServer().getMessenger().unregisterOutgoingPluginChannel(this);
