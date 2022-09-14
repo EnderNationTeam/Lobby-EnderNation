@@ -12,24 +12,14 @@ public class InventoryManager {
 
     static Player player;
 
-    private static final ItemStack compass = new ItemCreator(Material.RECOVERY_COMPASS)
-            .setName("§8» §b§lNavigator")
-            .setLore("§7Teleportiere dich zu den verschiedenen Spielmodi!")
-            .toItemStack();
-    private static final ItemStack playerHide = new ItemCreator(Material.LIME_DYE)
-            .setName("§8» §7§lSpieler §8| §a§lAlle")
-            .setLore("§7Benutze Rechtsklick um Spieler zu verstecken!")
-            .toItemStack();
-    private static final ItemStack extras = new ItemCreator(Material.PLAYER_HEAD)
-            .setSkull("§8» §e§lExtras",
-                    "ElMarcosFTW",
-                    "§7Nutze deine Cosmetics um zu flexxen!")
-            .toItemStack();
-    private static final ItemStack switcher = new ItemCreator(Material.NETHER_STAR)
-            .setName("§8» §6§lLobby Wechsler")
-            .setLore("§7Wechsle zwischen den Lobbys!")
-            .toItemStack();
+    private static final ItemStack compass = new ItemCreator(Material.RECOVERY_COMPASS).setName("§8» §b§lNavigator").setLore("§7Teleportiere dich zu den verschiedenen Spielmodi!").toItemStack();
+    private static final ItemStack playerHide = new ItemCreator(Material.LIME_DYE).setName("§8» §7§lSpieler §8| §a§lAlle").setLore("§7Benutze Rechtsklick um Spieler zu verstecken!").toItemStack();
+    private static final ItemStack extras = new ItemCreator(Material.PLAYER_HEAD).setSkull("§8» §e§lExtras", "ElMarcosFTW", "§7Nutze deine Cosmetics um zu flexxen!").toItemStack();
+    private static final ItemStack switcher = new ItemCreator(Material.NETHER_STAR).setName("§8» §6§lLobby Wechsler").setLore("§7Wechsle zwischen den Lobbys!").toItemStack();
 
+    // Admin items
+    private static final ItemStack flyMode = new ItemCreator(Material.FEATHER).setName("§8» §9Fliegen §8| §cDeaktiviert").toItemStack();
+    private static final ItemStack teamServerSwitcher = new ItemCreator(Material.COMMAND_BLOCK_MINECART).setName("§8» §6§lServer Wechsler").toItemStack();
 
     public static void setPlayerInventory(Player player) {
         Inventory inventory = player.getInventory();
@@ -49,6 +39,8 @@ public class InventoryManager {
     }
 
     public static void addAdminItems(Player player) {
-
+        Inventory inventory = player.getInventory();
+        inventory.setItem(21, flyMode);
+        inventory.setItem(22, teamServerSwitcher);
     }
 }

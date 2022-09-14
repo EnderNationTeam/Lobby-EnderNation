@@ -35,6 +35,9 @@ public class PlayerConnectionListener implements Listener {
         InventoryManager.setPlayerInventory(player);
         new LobbyScoreboard(player);
         player.setGameMode(GameMode.SURVIVAL);
+        if (player.hasPermission("lobby.team")) {
+            InventoryManager.addAdminItems(player);
+        }
     }
 
     @EventHandler
