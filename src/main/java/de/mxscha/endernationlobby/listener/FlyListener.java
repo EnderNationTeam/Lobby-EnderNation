@@ -19,7 +19,6 @@ public class FlyListener implements Listener {
     public void onInventory(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         if (event.getCurrentItem() == null) return;
-        if (event.getInventory() == player.getInventory()) {
             if (event.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §9§lFliegen §8| §cDeaktiviert")) {
                 player.setFlying(true);
                 player.setAllowFlight(true);
@@ -35,5 +34,4 @@ public class FlyListener implements Listener {
                 player.sendMessage(MessageManager.Prefix + "§7Du kannst nun §cnicht mehr §7fliegen!");
             }
         }
-    }
 }
