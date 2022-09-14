@@ -61,6 +61,10 @@
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
+        <repository>
+            <id>cloudnet-releases</id>
+            <url>https://repo.cloudnetservice.eu/repository/releases/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -76,6 +80,18 @@
             <version>1.0-SNAPSHOT</version>
             <scope>system</scope>
             <systemPath>${pom.basedir}/libs/moneysystem-1.0-SNAPSHOT.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>de.dytanic.cloudnet</groupId>
+            <artifactId>cloudnet</artifactId>
+            <version>3.4.5-RELEASE</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.dytanic.cloudnet</groupId>
+            <artifactId>cloudnet-driver</artifactId>
+            <version>3.4.5-RELEASE</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
