@@ -20,15 +20,15 @@ public class FlyListener implements Listener {
         Player player = (Player) event.getWhoClicked();
         if (event.getCurrentItem() == null) return;
             if (event.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §9§lFliegen §8| §cDeaktiviert")) {
-                player.setFlying(true);
                 player.setAllowFlight(true);
+                player.setFlying(true);
                 player.getInventory().setItem(21, flyModeA);
                 player.closeInventory();
                 player.sendMessage(MessageManager.Prefix + "§7Du kannst §anun §7fliegen!");
             }
             if (event.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §9§lFliegen §8| §aAktiviert")) {
-                player.setFlying(false);
                 player.setAllowFlight(false);
+                player.setFlying(false);
                 player.getInventory().setItem(21, flyModeD);
                 player.closeInventory();
                 player.sendMessage(MessageManager.Prefix + "§7Du kannst nun §cnicht mehr §7fliegen!");
