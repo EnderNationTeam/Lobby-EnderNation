@@ -1,9 +1,6 @@
 package de.mxscha.endernationlobby.listener.items;
 
-
-import de.dytanic.cloudnet.CloudNet;
-import de.dytanic.cloudnet.cluster.DefaultClusterNodeServerProvider;
-import de.dytanic.cloudnet.cluster.DefaultNodeServerProvider;
+import de.mxscha.endernationlobby.cloudnet.Switcher;
 import de.mxscha.endernationlobby.utils.manager.items.ItemCreator;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -13,9 +10,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
-
-import java.util.Collection;
-import java.util.UUID;
 
 public class LobbySwitcher implements Listener {
 
@@ -28,9 +22,7 @@ public class LobbySwitcher implements Listener {
                     event.setCancelled(true);
                     Inventory inventory = Bukkit.createInventory(null, 5*9, "§8» §6§lLobby Wechsler");
                     fill(inventory);
-
-
-
+                    Switcher.stop();
                     player.openInventory(inventory);
                 }
             }

@@ -70,7 +70,6 @@ public class PlayerHider implements Listener {
                         player.getInventory().setItem(1, vip);
                         player.setCooldown(Material.PURPLE_DYE, 12);
                     }
-
                 } else if (event.getItem().getItemMeta().getDisplayName().equals("§8» §7§lSpieler §8| §5§lVIPs sichtbar")) {
                     if (!player.hasCooldown(Material.PURPLE_DYE)) {
                         for (Player players : Bukkit.getOnlinePlayers()) {

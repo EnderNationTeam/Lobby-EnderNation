@@ -6,6 +6,7 @@ import de.mxscha.endernationlobby.listener.*;
 import de.mxscha.endernationlobby.listener.cancel.*;
 import de.mxscha.endernationlobby.listener.items.Compass;
 import de.mxscha.endernationlobby.listener.items.Extras;
+import de.mxscha.endernationlobby.listener.items.LobbySwitcher;
 import de.mxscha.endernationlobby.listener.items.PlayerHider;
 import de.mxscha.endernationlobby.utils.config.Settings;
 import de.mxscha.endernationlobby.utils.manager.MessageManager;
@@ -26,6 +27,7 @@ public class Register {
         manager.registerEvents(new PlayerChatEvent(), core);
         manager.registerEvents(new PlayerDamageListener(), core);
         manager.registerEvents(new PlayerTeleportToGamesListener(), core);
+        manager.registerEvents(new LobbySwitcher(), core);
         manager.registerEvents(new FlyListener(), core);
         manager.registerEvents(new PlayerHider(), core);
         manager.registerEvents(new Compass(), core);
