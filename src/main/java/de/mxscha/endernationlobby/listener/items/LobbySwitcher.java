@@ -118,7 +118,7 @@ public class LobbySwitcher implements Listener {
                                 // The Player is on this server && send normal Info
                                 itemStack = new ItemCreator(Material.GLOWSTONE_DUST)
                                                 .setName("§e" + name)
-                                                .setLore("§cPlayers " + currentPlayers + "/" + maxPlayers)
+                                                .setLore("§7Players §a" + currentPlayers + "§7/§c" + maxPlayers)
                                                 .toItemStack();
                             } else
                                 // 3. is the service full?
