@@ -41,9 +41,11 @@ public class ServerWechslerListener implements Listener {
                 fill(inventory);
 
                 // Server info
+                int positionX = 1; // Starting at 1
+                int positionY = 0;
                 int position = 0;
                 WrapperGeneralCloudServiceProvider wrapperNodeInfoProvider = new WrapperGeneralCloudServiceProvider(Wrapper.getInstance());
-                for(ServiceInfoSnapshot service : wrapperNodeInfoProvider.getCloudServices()) {
+                for(ServiceInfoSnapshot service : wrapperNodeInfoProvider.getStartedCloudServices()) {
                     // get all infos
                     String nameRaw;
                     String name;
@@ -87,11 +89,18 @@ public class ServerWechslerListener implements Listener {
                      */
 
                     // Count up because it is a new service
-                    position++;
+                    if(positionX < 9) { // count y up with at 8
+                        positionY++;
+                        positionX = 1;
+                    } else
+                        positionX++;
 
-                    // Only 7 Servers allowed
-                    if(position >= 7) {
-                        player.sendMessage("§Error! §7Only 7 Servers are allowed. Report it to an Administrator!");
+                    // Math xd. y * 9 and x the location
+                    position = (positionY * 9) + positionX;
+
+                    // Only 42 Servers allowed
+                    if(position >= 42) {
+                        player.sendMessage("§Error! §7Only 42 Servers are allowed. Report it to an Administrator!");
                         continue; // Skip this service
                     }
 
