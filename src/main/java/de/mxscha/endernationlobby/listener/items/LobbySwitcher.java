@@ -8,6 +8,7 @@ import de.dytanic.cloudnet.wrapper.provider.service.WrapperGeneralCloudServicePr
 import de.mxscha.endernationlobby.utils.manager.items.ItemCreator;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,9 +16,15 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.material.MaterialData;
+import org.bukkit.persistence.PersistentDataHolder;
+import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
+import java.util.NoSuchElementException;
 
 public class LobbySwitcher implements Listener {
 
@@ -37,18 +44,28 @@ public class LobbySwitcher implements Listener {
                     int position = 0;
                     WrapperGeneralCloudServiceProvider wrapperNodeInfoProvider = new WrapperGeneralCloudServiceProvider(Wrapper.getInstance());
                     for(ServiceInfoSnapshot service : wrapperNodeInfoProvider.getCloudServices("Lobby")) {
-                        // Fix of java.util.NoSuchElementException: No value present
-                        // We cannot get infos of the server is the server not connected
-                        if(!service.isConnected()) {
-                            continue; // Server is offline
-                        }
                         // get all infos
-                        String name = service.getName().replaceAll("-", " ");
-                        int currentPlayers = service.getProperty(BridgeServiceProperty.ONLINE_COUNT).get();
-                        int maxPlayers = service.getProperty(BridgeServiceProperty.MAX_PLAYERS).get();
-                        boolean isFull = service.getProperty(BridgeServiceProperty.IS_FULL).get();
-                        boolean isStarting = service.getProperty(BridgeServiceProperty.IS_STARTING).get();
-                        boolean isEmpty = service.getProperty(BridgeServiceProperty.IS_EMPTY).get();
+                        String name;
+                        int currentPlayers;
+                        int maxPlayers;
+                        boolean isFull;
+                        boolean isStarting;
+                        boolean isEmpty;
+
+                        // No error if the server starting
+                        try {
+                            // We cannot get infos of the server is the server not connected
+                            name = service.getName().replaceAll("-", " ");
+                            currentPlayers = service.getProperty(BridgeServiceProperty.ONLINE_COUNT).get();
+                            maxPlayers = service.getProperty(BridgeServiceProperty.MAX_PLAYERS).get();
+                            isFull = service.getProperty(BridgeServiceProperty.IS_FULL).get();
+                            isStarting = service.getProperty(BridgeServiceProperty.IS_STARTING).get();
+                            isEmpty = service.getProperty(BridgeServiceProperty.IS_EMPTY).get();
+                        }catch (NoSuchElementException ex) {
+                            // NoSuchElementException – if no value is present
+                            continue; // skip item
+                        }
+
 
                         // Check if player on this server
                         boolean isPlayerOnline = false;
@@ -76,55 +93,62 @@ public class LobbySwitcher implements Listener {
                             continue; // Skip this service
                         }
 
+                        ItemStack itemStack = null;
+
                         // set to invenory
                         // 1. is the server starting?
                         if(isStarting) {
                             // Starting
-                            inventory.setItem(position,
-                                    new ItemCreator(Material.LIGHT_GRAY_CONCRETE)
-                                            .setName(name)
-                                            .setLore("7Players §aStartet")
-                                            .toItemStack());
+                            itemStack = new ItemCreator(Material.LIGHT_GRAY_CONCRETE)
+                                    .setName("§e" + name)
+                                    .setLore("7Players §aStartet")
+                                    .toItemStack();
 
                         } else
                             // 2. is the player on this server?
                             if(isPlayerOnline) {
                                 // The Player is on this server && send normal Info
-                                inventory.setItem(position,
-                                        new ItemCreator(Material.GLOWSTONE_DUST)
-                                                .setName(name)
+                                itemStack = new ItemCreator(Material.GLOWSTONE_DUST)
+                                                .setName("§e" + name)
                                                 .setLore("§cPlayers " + currentPlayers + "/" + maxPlayers)
-                                                .toItemStack());
+                                                .toItemStack();
                             } else
                                 // 3. is the service full?
                                 if(isFull) {
                                     // Full
-                                    inventory.setItem(position,
-                                            new ItemCreator(Material.REDSTONE)
+                                    itemStack = new ItemCreator(Material.REDSTONE)
                                                     .setName("§c" + name)
                                                     .setLore("§7Players §cServer Full")
-                                                    .toItemStack());
+                                                    .toItemStack();
 
                                 } else
                                     // 4. is the service empty?
                                     if(isEmpty) {
                                         // Empty
-                                        inventory.setItem(position,
-                                                new ItemCreator(Material.SUGAR)
-                                                        .setName("§e" +name)
+                                        itemStack = new ItemCreator(Material.SUGAR)
+                                                        .setName("§e" + name)
                                                         .setLore("§7Players §7Leer")
-                                                        .toItemStack());
+                                                        .toItemStack();
 
                                     } else
                                         // 5. Send normal server info
                                         {
                                             // Normal server info
-                                            inventory.setItem(position,
-                                                    new ItemCreator(Material.SUGAR)
+                                            itemStack = new ItemCreator(Material.SUGAR)
                                                             .setName("§e" + name)
                                                             .setLore("§7Players §a" + currentPlayers + "§7/§c" + maxPlayers)
-                                                            .toItemStack());
+                                                            .toItemStack();
                                         }
+
+                                    // get item meta
+                                    ItemMeta itemMeta = itemStack.getItemMeta();
+                                    // Add to item server info (name)
+                                    itemMeta.getPersistentDataContainer().set(NamespacedKey.fromString("server"), PersistentDataType.STRING, name);
+                                    // set the server info into the item
+                                    itemStack.setItemMeta(itemMeta);
+
+                                    // set the item to the inventory
+                                    inventory.setItem(position, itemStack);
                     }
                     // Keksgauner END
 
@@ -132,7 +156,7 @@ public class LobbySwitcher implements Listener {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
