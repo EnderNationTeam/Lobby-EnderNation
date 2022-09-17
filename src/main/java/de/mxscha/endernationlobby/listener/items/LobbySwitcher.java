@@ -1,18 +1,26 @@
 package de.mxscha.endernationlobby.listener.items;
 
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import de.dytanic.cloudnet.driver.service.ServiceInfoSnapshot;
 import de.dytanic.cloudnet.ext.bridge.BridgeServiceProperty;
 import de.dytanic.cloudnet.ext.bridge.player.ServicePlayer;
 import de.dytanic.cloudnet.wrapper.Wrapper;
 import de.dytanic.cloudnet.wrapper.provider.service.WrapperGeneralCloudServiceProvider;
+import de.mxscha.endernationlobby.LobbyCore;
+import de.mxscha.endernationlobby.utils.manager.MessageManager;
 import de.mxscha.endernationlobby.utils.manager.items.ItemCreator;
+import de.mxscha.endernationlobby.utils.manager.locations.ConfigLocationUtil;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
@@ -39,7 +47,7 @@ public class LobbySwitcher implements Listener {
                     fill(inventory);
                     //Switcher.stop();
 
-                    // Begin Keksgauner - Date 15.09.2022
+                    // Begin Keksgauner - Date 17.09.2022
                     // Server info
                     int position = 0;
                     WrapperGeneralCloudServiceProvider wrapperNodeInfoProvider = new WrapperGeneralCloudServiceProvider(Wrapper.getInstance());
@@ -159,6 +167,37 @@ public class LobbySwitcher implements Listener {
             //e.printStackTrace();
         }
     }
+
+    // Begin Keksgauner - Date 17.09.2022
+    @EventHandler
+    public void onInventoryClick(InventoryClickEvent event) {
+        try {
+            Player player = (Player) event.getWhoClicked();
+            if (event.getView().getTitle().equals("§8» §6§lLobby Wechsler")) {
+                // get item infos
+                ItemStack itemStack = event.getCurrentItem();
+                ItemMeta itemMeta = itemStack.getItemMeta();
+                // check if the material sugar. This mean you can join the server
+                if(itemStack.getType() != Material.SUGAR) return;
+                // get name without colors
+                String serverName = ChatColor.stripColor(itemMeta.getDisplayName());
+                // get server info inside the item
+                String server = itemMeta.getPersistentDataContainer().get(NamespacedKey.fromString("server"), PersistentDataType.STRING);
+                // send to server
+                ByteArrayDataOutput out;
+                out = ByteStreams.newDataOutput();
+                out.writeUTF("Connect");
+                out.writeUTF(server);
+                player.sendPluginMessage(LobbyCore.getInstance(), "BungeeCord", out.toByteArray());
+                // send player info
+                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 0.5f, 1);
+                player.sendMessage(MessageManager.Prefix + "§7Du wurdest zu §a§l" + serverName + " §7gesendet!");
+            }
+        } catch (Exception e) {
+
+        }
+    }
+    // Keksgauner END
 
     private void fill(Inventory inventory) {
         for (int i = 0; i < inventory.getSize(); i++) {
