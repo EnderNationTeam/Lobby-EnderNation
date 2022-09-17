@@ -89,7 +89,7 @@ public class ServerWechslerListener implements Listener {
                      */
 
                     // Count up because it is a new service
-                    if(positionX < 9) { // count y up with at 8
+                    if(positionX > 9) { // count y up with at 8
                         positionY++;
                         positionX = 1;
                     } else
