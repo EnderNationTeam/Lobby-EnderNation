@@ -30,24 +30,22 @@ import org.bukkit.persistence.PersistentDataType;
 import java.util.Collection;
 import java.util.NoSuchElementException;
 
-public class LobbySwitcher implements Listener {
+public class ServerWechsler implements Listener {
 
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
         try {
             Player player = event.getPlayer();
             if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                if (event.getItem().getItemMeta().getDisplayName().equals("§8» §6§lLobby Wechsler")) {
+                if (event.getItem().getItemMeta().getDisplayName().equals("§8» §6§lServer Wechsler")) {
                     event.setCancelled(true);
-                    Inventory inventory = Bukkit.createInventory(null, InventoryType.HOPPER, "§8» §6§lLobby Wechsler");
+                    Inventory inventory = Bukkit.createInventory(null, 9 * 6, "§8» §6§lServer Wechsler");
                     fill(inventory);
-                    //Switcher.stop();
 
-                    // Begin Keksgauner - Date 17.09.2022
                     // Server info
                     int position = 0;
                     WrapperGeneralCloudServiceProvider wrapperNodeInfoProvider = new WrapperGeneralCloudServiceProvider(Wrapper.getInstance());
-                    for(ServiceInfoSnapshot service : wrapperNodeInfoProvider.getCloudServices("Lobby")) {
+                    for(ServiceInfoSnapshot service : wrapperNodeInfoProvider.getCloudServices()) {
                         // get all infos
                         String nameRaw;
                         String name;
@@ -93,9 +91,9 @@ public class LobbySwitcher implements Listener {
                         // Count up because it is a new service
                         position++;
 
-                        // Only 3 Servers allowed
-                        if(position >= 3) {
-                            player.sendMessage("§Error! §7Only 3 Servers are allowed. Report it to an Administrator!");
+                        // Only 7 Servers allowed
+                        if(position >= 7) {
+                            player.sendMessage("§Error! §7Only 7 Servers are allowed. Report it to an Administrator!");
                             continue; // Skip this service
                         }
 
@@ -115,46 +113,46 @@ public class LobbySwitcher implements Listener {
                             if(isPlayerOnline) {
                                 // The Player is on this server && send normal Info
                                 itemStack = new ItemCreator(Material.GLOWSTONE_DUST)
-                                                .setName("§e" + name)
-                                                .setLore("§7Players §a" + currentPlayers + "§7/§c" + maxPlayers)
-                                                .toItemStack();
+                                        .setName("§e" + name)
+                                        .setLore("§7Players §a" + currentPlayers + "§7/§c" + maxPlayers)
+                                        .toItemStack();
                             } else
                                 // 3. is the service full?
                                 if(isFull) {
                                     // Full
                                     itemStack = new ItemCreator(Material.REDSTONE)
-                                                    .setName("§c" + name)
-                                                    .setLore("§7Players §cServer Full")
-                                                    .toItemStack();
+                                            .setName("§c" + name)
+                                            .setLore("§7Players §cServer Full")
+                                            .toItemStack();
 
                                 } else
                                     // 4. is the service empty?
                                     if(isEmpty) {
                                         // Empty
                                         itemStack = new ItemCreator(Material.SUGAR)
-                                                        .setName("§e" + name)
-                                                        .setLore("§7Players §7Leer")
-                                                        .toItemStack();
+                                                .setName("§e" + name)
+                                                .setLore("§7Players §7Leer")
+                                                .toItemStack();
 
                                     } else
-                                        // 5. Send normal server info
-                                        {
-                                            // Normal server info
-                                            itemStack = new ItemCreator(Material.SUGAR)
-                                                            .setName("§e" + name)
-                                                            .setLore("§7Players §a" + currentPlayers + "§7/§c" + maxPlayers)
-                                                            .toItemStack();
-                                        }
+                                    // 5. Send normal server info
+                                    {
+                                        // Normal server info
+                                        itemStack = new ItemCreator(Material.SUGAR)
+                                                .setName("§e" + name)
+                                                .setLore("§7Players §a" + currentPlayers + "§7/§c" + maxPlayers)
+                                                .toItemStack();
+                                    }
 
-                                    // get item meta
-                                    ItemMeta itemMeta = itemStack.getItemMeta();
-                                    // Add to item server info (name)
-                                    itemMeta.getPersistentDataContainer().set(NamespacedKey.fromString("server"), PersistentDataType.STRING, nameRaw);
-                                    // set the server info into the item
-                                    itemStack.setItemMeta(itemMeta);
+                        // get item meta
+                        ItemMeta itemMeta = itemStack.getItemMeta();
+                        // Add to item server info (name)
+                        itemMeta.getPersistentDataContainer().set(NamespacedKey.fromString("server"), PersistentDataType.STRING, nameRaw);
+                        // set the server info into the item
+                        itemStack.setItemMeta(itemMeta);
 
-                                    // set the item to the inventory
-                                    inventory.setItem(position, itemStack);
+                        // set the item to the inventory
+                        inventory.setItem(position, itemStack);
                     }
                     // Keksgauner END
 
@@ -166,12 +164,11 @@ public class LobbySwitcher implements Listener {
         }
     }
 
-    // Begin Keksgauner - Date 17.09.2022
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         try {
             Player player = (Player) event.getWhoClicked();
-            if (event.getView().getTitle().equals("§8» §6§lLobby Wechsler")) {
+            if (event.getView().getTitle().equals("§8» §6§lServer Wechsler")) {
                 // get item infos
                 ItemStack itemStack = event.getCurrentItem();
                 ItemMeta itemMeta = itemStack.getItemMeta();
@@ -195,7 +192,6 @@ public class LobbySwitcher implements Listener {
 
         }
     }
-    // Keksgauner END
 
     private void fill(Inventory inventory) {
         for (int i = 0; i < inventory.getSize(); i++) {
