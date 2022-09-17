@@ -25,7 +25,7 @@ public class Register {
         manager.registerEvents(new PlayerDamageListener(), core);
         manager.registerEvents(new PlayerTeleportToGamesListener(), core);
         manager.registerEvents(new LobbySwitcher(), core);
-        manager.registerEvents(new ServerWechsler(), core);
+        manager.registerEvents(new ServerWechslerListener(), core);
         manager.registerEvents(new FlyListener(), core);
         manager.registerEvents(new PlayerHider(), core);
         manager.registerEvents(new Compass(), core);
