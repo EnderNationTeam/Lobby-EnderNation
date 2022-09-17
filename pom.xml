@@ -76,10 +76,10 @@
         </dependency>
         <dependency>
             <groupId>de.mxscha</groupId>
-            <artifactId>moneysystem</artifactId>
+            <artifactId>coinsystem</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>system</scope>
-            <systemPath>${pom.basedir}/libs/moneysystem-1.0-SNAPSHOT.jar</systemPath>
+            <systemPath>${pom.basedir}/libs/coinsystem-1.0-SNAPSHOT.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>de.dytanic.cloudnet</groupId>

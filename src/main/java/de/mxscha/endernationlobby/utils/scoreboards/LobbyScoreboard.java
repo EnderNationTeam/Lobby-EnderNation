@@ -1,7 +1,7 @@
 package de.mxscha.endernationlobby.utils.scoreboards;
 
+import de.mxscha.coinsystem.CoinCore;
 import de.mxscha.endernationlobby.utils.scoreboards.tablist.TablistManager;
-import de.mxscha.money.MoneysystemCore;
 import org.bukkit.entity.Player;
 
 public class LobbyScoreboard extends ScoreboardBuilder {
@@ -48,7 +48,7 @@ public class LobbyScoreboard extends ScoreboardBuilder {
         }
         setScore("§a", 4);
         setScore("§8● §7Deine Coins§8:", 3);
-        setScore("  §8» §c" + MoneysystemCore.getInstance().getApi().getMoney(player.getUniqueId()), 2);
+        setScore("  §8» §c" + CoinCore.getInstance().getApi().getCoins(player.getUniqueId()), 2);
         setScore("§a§8§m                               ", 1);
     }
 
