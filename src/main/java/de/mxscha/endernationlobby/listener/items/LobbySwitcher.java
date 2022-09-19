@@ -94,8 +94,8 @@ public class LobbySwitcher implements Listener {
                         position++;
 
                         // Only 3 Servers allowed
-                        if(position >= 3) {
-                            player.sendMessage("§Error! §7Only 3 Servers are allowed. Report it to an Administrator!");
+                        if(position > 3) {
+                            player.sendMessage("§4Error! §7Only 3 Servers are allowed. Report it to an Administrator!");
                             continue; // Skip this service
                         }
 
