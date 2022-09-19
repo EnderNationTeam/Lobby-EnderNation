@@ -154,7 +154,7 @@ public class LobbySwitcher implements Listener {
                                     itemStack.setItemMeta(itemMeta);
 
                                     // set the item to the inventory
-                                    inventory.setItem(Integer.valueOf(String.valueOf(nameRaw.split("-")[1].equals(1))), itemStack);
+                                    inventory.setItem(Integer.valueOf(nameRaw.split("-")[1]), itemStack);
                     }
                     // Keksgauner END
 
