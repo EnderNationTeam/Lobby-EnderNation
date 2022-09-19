@@ -45,17 +45,21 @@ public class SetupCommand implements CommandExecutor {
                     case 3:
                         if (args[0].equalsIgnoreCase("set")) {
                             if (args[1].equalsIgnoreCase("Spawn")) {
-                                if (args[2].equalsIgnoreCase("bedwars")) {
-                                    new ConfigLocationUtil(player.getLocation(), "BedWars").saveLocation();
-                                    player.sendMessage(MessageManager.Prefix + "§7Du hast den §b§lBedWars Spawn §7gesetzt!");
+                                if (args[2].equalsIgnoreCase("BB")) {
+                                    new ConfigLocationUtil(player.getLocation(), "BB").saveLocation();
+                                    player.sendMessage(MessageManager.Prefix + "§7Du hast den §a§lBuild §c§lBattle Spawn §7gesetzt!");
                                     player.playSound(player, Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
-                                } else if (args[2].equalsIgnoreCase("ttt")) {
-                                    new ConfigLocationUtil(player.getLocation(), "TTT").saveLocation();
-                                    player.sendMessage(MessageManager.Prefix + "§7Du hast den §c§lTTT Spawn §7gesetzt!");
+                                } else if (args[2].equalsIgnoreCase("MM")) {
+                                    new ConfigLocationUtil(player.getLocation(), "MM").saveLocation();
+                                    player.sendMessage(MessageManager.Prefix + "§7Du hast den §c§lMurder Mystery Spawn §7gesetzt!");
                                     player.playSound(player, Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
                                 } else if (args[2].equalsIgnoreCase("EndOfLife")) {
                                     new ConfigLocationUtil(player.getLocation(), "EndOfLife").saveLocation();
                                     player.sendMessage(MessageManager.Prefix + "§7Du hast den §9§lEndOfLife Spawn §7gesetzt!");
+                                    player.playSound(player, Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
+                                } else if (args[2].equalsIgnoreCase("Smash")) {
+                                    new ConfigLocationUtil(player.getLocation(), "Smash").saveLocation();
+                                    player.sendMessage(MessageManager.Prefix + "§7Du hast den §a§lSmash Spawn §7gesetzt!");
                                     player.playSound(player, Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
                                 }
                             }
