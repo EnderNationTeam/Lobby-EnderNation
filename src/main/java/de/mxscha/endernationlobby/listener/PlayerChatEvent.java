@@ -1,5 +1,8 @@
 package de.mxscha.endernationlobby.listener;
 
+import de.dytanic.cloudnet.driver.CloudNetDriver;
+import de.dytanic.cloudnet.driver.permission.IPermissionGroup;
+import de.dytanic.cloudnet.driver.permission.IPermissionUser;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,6 +19,18 @@ public class PlayerChatEvent implements Listener {
         } else {
             msg = event.getMessage();
         }
+
+        // CloudNet Permission group
+        IPermissionUser user = CloudNetDriver.getInstance().getPermissionManagement().getUser(player.getUniqueId());
+
+        if (user == null) {
+            return;
+        }
+        IPermissionGroup group = CloudNetDriver.getInstance().getPermissionManagement().getHighestPermissionGroup(user);
+
+        event.setFormat(group.getPrefix() + "§8» §7" + player.getName() + "§8: §7" + msg);
+
+        /*
         if (player.hasPermission("rang.owner")) {
            event.setFormat("§4§lOwner §8» §7" + player.getName() + "§8: §f" + msg);
         } else
@@ -58,5 +73,6 @@ public class PlayerChatEvent implements Listener {
         if (player.hasPermission("rang.default")) {
             event.setFormat("§7§lSpieler §8» §7" + player.getName() + "§8: §7" + msg);
         }
+        */
     }
 }

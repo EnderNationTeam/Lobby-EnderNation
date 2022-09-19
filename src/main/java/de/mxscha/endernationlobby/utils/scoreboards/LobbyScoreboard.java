@@ -1,5 +1,8 @@
 package de.mxscha.endernationlobby.utils.scoreboards;
 
+import de.dytanic.cloudnet.driver.CloudNetDriver;
+import de.dytanic.cloudnet.driver.permission.IPermissionGroup;
+import de.dytanic.cloudnet.driver.permission.IPermissionUser;
 import de.mxscha.coinsystem.CoinCore;
 import de.mxscha.endernationlobby.utils.scoreboards.tablist.TablistManager;
 import org.bukkit.entity.Player;
@@ -17,6 +20,17 @@ public class LobbyScoreboard extends ScoreboardBuilder {
     public void createScoreboard() {
         setScore("§8§m                               ", 7);
         setScore("§8● §7Dein Rang§8:", 6);
+        // CloudNet Permission group
+        IPermissionUser user = CloudNetDriver.getInstance().getPermissionManagement().getUser(player.getUniqueId());
+
+        if (user == null) {
+            return;
+        }
+        IPermissionGroup group = CloudNetDriver.getInstance().getPermissionManagement().getHighestPermissionGroup(user);
+
+        setScore("  §8» " + group.getPrefix(), 5);
+
+        /*
         if (player.hasPermission("rang.owner")) {
             setScore("  §8» §4§lOwner", 5);
         } else if (player.hasPermission("rang.manager")) {
@@ -46,6 +60,7 @@ public class LobbyScoreboard extends ScoreboardBuilder {
         } else if (player.hasPermission("rang.spieler") || player.hasPermission("rang.default")) {
             setScore("  §8» §7§lSpieler", 5);
         }
+        */
         setScore("§a", 4);
         setScore("§8● §7Deine Coins§8:", 3);
         setScore("  §8» §c" + CoinCore.getInstance().getApi().getCoins(player.getUniqueId()), 2);
