@@ -45,7 +45,7 @@ public class LobbySwitcher implements Listener {
 
                     // Begin Keksgauner - Date 17.09.2022
                     // Server info
-                    int position = 0;
+                    int count = 0;
                     WrapperGeneralCloudServiceProvider wrapperNodeInfoProvider = new WrapperGeneralCloudServiceProvider(Wrapper.getInstance());
                     for(ServiceInfoSnapshot service : wrapperNodeInfoProvider.getCloudServices("Lobby")) {
                         // get all infos
@@ -91,10 +91,10 @@ public class LobbySwitcher implements Listener {
                          */
 
                         // Count up because it is a new service
-                        position++;
+                        count++;
 
                         // Only 3 Servers allowed
-                        if(position > 3) {
+                        if(count > 3) {
                             player.sendMessage("§4Error! §7Only 3 Servers are allowed. Report it to an Administrator!");
                             continue; // Skip this service
                         }
@@ -154,7 +154,7 @@ public class LobbySwitcher implements Listener {
                                     itemStack.setItemMeta(itemMeta);
 
                                     // set the item to the inventory
-                                    inventory.setItem(position, itemStack);
+                                    inventory.setItem(Integer.valueOf(String.valueOf(nameRaw.split("-")[1].equals(1))), itemStack);
                     }
                     // Keksgauner END
 
