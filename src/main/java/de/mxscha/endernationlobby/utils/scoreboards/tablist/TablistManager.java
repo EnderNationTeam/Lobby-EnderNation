@@ -87,9 +87,9 @@ public class TablistManager {
         builder.setPrefix("§1§lBuilder §8» §7");
         youtuberplus.setPrefix("§c§lYou§f§lTuber§d§l+ §8» §7");
         youtuber.setPrefix("§c§lYou§f§lTuber §8» §7");
-        enderhacker.setPrefix("§5§lE§b§lHacker §8» §7");
-        enderhero.setPrefix("§5§lE§5§lHero §8» §7");
-        enderking.setPrefix("&5E§6§lKing §8» §7");
+        enderhacker.setPrefix("§3§lE§b§lHacker §8» §7");
+        enderhero.setPrefix("§3§lE§5§lHero §8» §7");
+        enderking.setPrefix("&3E§6§lKing §8» §7");
         players.setPrefix("§7§lSpieler §8» §7");
 
         owner.setColor(ChatColor.GRAY);

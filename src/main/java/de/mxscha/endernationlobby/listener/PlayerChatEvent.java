@@ -47,13 +47,13 @@ public class PlayerChatEvent implements Listener {
             event.setFormat("§c§lYou§f§lTuber §8» §7" + player.getName() + "§8: §f" + msg);
         } else
         if (player.hasPermission("rang.enderhacker")) {
-            event.setFormat("§5§lEnder§b§lHacker §8» §7" + player.getName() + "§8: §f" + msg);
+            event.setFormat("§3§lEnder§b§lHacker §8» §7" + player.getName() + "§8: §f" + msg);
         } else
         if (player.hasPermission("rang.enderhero")) {
-            event.setFormat("§5§lEnder§5§lHero §8» §7" + player.getName() + "§8: §f" + msg);
+            event.setFormat("§3§lEnder§5§lHero §8» §7" + player.getName() + "§8: §f" + msg);
         } else
         if (player.hasPermission("rang.enderking")) {
-            event.setFormat("&5Ender§6§lKing §8» §7" + player.getName() + "§8: §f" + msg);
+            event.setFormat("&3Ender§6§lKing §8» §7" + player.getName() + "§8: §f" + msg);
         } else
         if (player.hasPermission("rang.default")) {
             event.setFormat("§7§lSpieler §8» §7" + player.getName() + "§8: §7" + msg);
