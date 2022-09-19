@@ -107,7 +107,7 @@ public class LobbySwitcher implements Listener {
                             // Starting
                             itemStack = new ItemCreator(Material.LIGHT_GRAY_CONCRETE)
                                     .setName("§e" + name)
-                                    .setLore("7Players §aStartet")
+                                    .setLore("§aStartet")
                                     .toItemStack();
 
                         } else
@@ -116,7 +116,7 @@ public class LobbySwitcher implements Listener {
                                 // The Player is on this server && send normal Info
                                 itemStack = new ItemCreator(Material.GLOWSTONE_DUST)
                                                 .setName("§e" + name)
-                                                .setLore("§7Players §a" + currentPlayers + "§7/§c" + maxPlayers)
+                                                .setLore("§7Spieler§8: §a" + currentPlayers + "§7/§c" + maxPlayers)
                                                 .toItemStack();
                             } else
                                 // 3. is the service full?
@@ -124,7 +124,7 @@ public class LobbySwitcher implements Listener {
                                     // Full
                                     itemStack = new ItemCreator(Material.REDSTONE)
                                                     .setName("§c" + name)
-                                                    .setLore("§7Players §cServer Full")
+                                                    .setLore("§cServer Voll")
                                                     .toItemStack();
 
                                 } else
@@ -133,7 +133,7 @@ public class LobbySwitcher implements Listener {
                                         // Empty
                                         itemStack = new ItemCreator(Material.SUGAR)
                                                         .setName("§e" + name)
-                                                        .setLore("§7Players §7Leer")
+                                                        .setLore("§7Leer")
                                                         .toItemStack();
 
                                     } else
@@ -142,7 +142,7 @@ public class LobbySwitcher implements Listener {
                                             // Normal server info
                                             itemStack = new ItemCreator(Material.SUGAR)
                                                             .setName("§e" + name)
-                                                            .setLore("§7Players §a" + currentPlayers + "§7/§c" + maxPlayers)
+                                                            .setLore("§7Spieler§8: §a" + currentPlayers + "§7/§c" + maxPlayers)
                                                             .toItemStack();
                                         }
 
