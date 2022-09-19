@@ -20,6 +20,7 @@ public class LobbyScoreboard extends ScoreboardBuilder {
     public void createScoreboard() {
         setScore("§8§m                               ", 7);
         setScore("§8● §7Dein Rang§8:", 6);
+
         // CloudNet Permission group
         IPermissionUser user = CloudNetDriver.getInstance().getPermissionManagement().getUser(player.getUniqueId());
 
@@ -29,7 +30,6 @@ public class LobbyScoreboard extends ScoreboardBuilder {
         IPermissionGroup group = CloudNetDriver.getInstance().getPermissionManagement().getHighestPermissionGroup(user);
 
         setScore("  §8» " + group.getPrefix(), 5);
-
         /*
         if (player.hasPermission("rang.owner")) {
             setScore("  §8» §4§lOwner", 5);
