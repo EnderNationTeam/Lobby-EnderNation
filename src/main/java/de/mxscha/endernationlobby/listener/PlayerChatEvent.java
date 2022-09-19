@@ -3,6 +3,7 @@ package de.mxscha.endernationlobby.listener;
 import de.dytanic.cloudnet.driver.CloudNetDriver;
 import de.dytanic.cloudnet.driver.permission.IPermissionGroup;
 import de.dytanic.cloudnet.driver.permission.IPermissionUser;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -28,7 +29,7 @@ public class PlayerChatEvent implements Listener {
         }
         IPermissionGroup group = CloudNetDriver.getInstance().getPermissionManagement().getHighestPermissionGroup(user);
 
-        event.setFormat(group.getPrefix() + "§8» §7" + player.getName() + "§8: §7" + msg);
+        event.setFormat(ChatColor.translateAlternateColorCodes('&', group.getPrefix()) + "§8» §7" + player.getName() + "§8: §7" + msg);
 
         /*
         if (player.hasPermission("rang.owner")) {
