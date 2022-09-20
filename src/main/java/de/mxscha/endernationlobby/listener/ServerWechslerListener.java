@@ -29,6 +29,7 @@ import java.util.NoSuchElementException;
 
 public class ServerWechslerListener implements Listener {
 
+    // TODO: Groups
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         try {

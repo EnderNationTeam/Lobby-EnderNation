@@ -30,6 +30,7 @@ public class Register {
         manager.registerEvents(new PlayerHider(), core);
         manager.registerEvents(new Compass(), core);
         manager.registerEvents(new Extras(), core);
+        manager.registerEvents(new DoubleJumpListener(), core);
         // Settings
         MessageManager.Prefix = Settings.configuration.getString("Prefix").replace("&", "§");
     }

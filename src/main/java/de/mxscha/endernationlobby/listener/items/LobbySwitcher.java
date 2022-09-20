@@ -32,6 +32,8 @@ import java.util.NoSuchElementException;
 
 public class LobbySwitcher implements Listener {
 
+    // TODO: Write for this a api
+
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
         try {

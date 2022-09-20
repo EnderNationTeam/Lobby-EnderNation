@@ -38,6 +38,9 @@ public class PlayerConnectionListener implements Listener {
         if (player.hasPermission("lobby.team")) {
             InventoryManager.addAdminItems(player);
         }
+
+        // Keksgauner double jump
+        player.setAllowFlight(true);
     }
 
     @EventHandler
