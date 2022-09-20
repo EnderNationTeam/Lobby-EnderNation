@@ -24,23 +24,25 @@ public class DoubleJumpListener implements Listener {
         if(player.getGameMode().equals(GameMode.CREATIVE) || player.getGameMode().equals(GameMode.SPECTATOR))
             return;
 
-        event.setCancelled(true);
-
         // if the player not blacklisted
         if(backlist.contains(player))
             return;
+
+        event.setCancelled(true);
 
         player.setVelocity(player.getLocation().getDirection().multiply(1).setY(1));
 
         player.playSound(player.getLocation(), Sound.ENTITY_CAT_HISS, 40, 10);
 
+        player.setAllowFlight(false);
         backlist.add(player);
 
         new BukkitRunnable() {
             @Override
             public void run() {
+                player.setAllowFlight(true);
                 backlist.remove(player);
             }
-        }.runTaskLater(LobbyCore.getInstance(), 30);
+        }.runTaskLater(LobbyCore.getInstance(), 28);
     }
 }
