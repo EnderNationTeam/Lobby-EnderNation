@@ -2,6 +2,7 @@ name: EndernationLobby
 version: '${project.version}'
 main: de.mxscha.endernationlobby.LobbyCore
 api-version: 1.19
+depend: [ ProtocolLib ]
 
 commands:
   setup:
