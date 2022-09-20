@@ -1,6 +1,5 @@
 package de.mxscha.endernationlobby.listener;
 
-import de.mxscha.endernationlobby.utils.manager.InventoryManager;
 import de.mxscha.endernationlobby.utils.manager.MessageManager;
 import de.mxscha.endernationlobby.utils.manager.items.ItemCreator;
 import org.bukkit.Material;
