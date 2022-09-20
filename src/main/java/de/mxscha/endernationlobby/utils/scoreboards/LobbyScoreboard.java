@@ -28,40 +28,44 @@ public class LobbyScoreboard extends ScoreboardBuilder {
         if (user == null) {
             return;
         }
-        IPermissionGroup group = CloudNetDriver.getInstance().getPermissionManagement().getHighestPermissionGroup(user);
+        try {
+            // We can use cloudnet
+            IPermissionGroup group = CloudNetDriver.getInstance().getPermissionManagement().getHighestPermissionGroup(user);
 
-        setScore("  §8» " + ChatColor.translateAlternateColorCodes('&', group.getPrefix()), 5);
-        /*
-        if (player.hasPermission("rang.owner")) {
-            setScore("  §8» §4§lOwner", 5);
-        } else if (player.hasPermission("rang.manager")) {
-            setScore("  §8» §c§lManager", 5);
-        } else if (player.hasPermission("rang.admin")) {
-            setScore("  §8» §c§lAdmin", 5);
-        } else if (player.hasPermission("rang.developer")) {
-            setScore("  §8» §b§lDeveloper", 5);
-        } else if (player.hasPermission("rang.srmoderator")) {
-            setScore("  §8» §c§lSr§5§lModerator", 5);
-        } else if (player.hasPermission("rang.moderator")) {
-            setScore("  §8» §5§lModerator", 5);
-        } else if (player.hasPermission("rang.supporter")) {
-            setScore("  §8» §e§lSupporter", 5);
-        } else if (player.hasPermission("rang.builder")) {
-            setScore("  §8» §1§lBuilder", 5);
-        } else if (player.hasPermission("rang.youtuberplus")) {
-            setScore("  §8» §5§lYou§f§lTuber§d§l+", 5);
-        } else if (player.hasPermission("rang.youtuber")) {
-            setScore("  §8» §5§lYou§f§lTuber", 5);
-        } else if (player.hasPermission("rang.enderhacker")) {
-            setScore("  §8» §3§lEnder§b§lHacker", 5);
-        } else if (player.hasPermission("rang.enderhero")) {
-            setScore("  §8» §3§lEnder§5§lHero", 5);
-        } else if (player.hasPermission("rang.enderking")) {
-            setScore("  §8» &3Ender§6§lKing", 5);
-        } else if (player.hasPermission("rang.spieler") || player.hasPermission("rang.default")) {
-            setScore("  §8» §7§lSpieler", 5);
+            setScore("  §8» " + ChatColor.translateAlternateColorCodes('&', group.getPrefix()), 5);
+        } catch (ClassCastException ex) {
+            // We cannot use cloudnet
+            if (player.hasPermission("rang.owner")) {
+                setScore("  §8» §4§lOwner", 5);
+            } else if (player.hasPermission("rang.manager")) {
+                setScore("  §8» §c§lManager", 5);
+            } else if (player.hasPermission("rang.admin")) {
+                setScore("  §8» §c§lAdmin", 5);
+            } else if (player.hasPermission("rang.developer")) {
+                setScore("  §8» §b§lDeveloper", 5);
+            } else if (player.hasPermission("rang.srmoderator")) {
+                setScore("  §8» §c§lSr§5§lModerator", 5);
+            } else if (player.hasPermission("rang.moderator")) {
+                setScore("  §8» §5§lModerator", 5);
+            } else if (player.hasPermission("rang.supporter")) {
+                setScore("  §8» §e§lSupporter", 5);
+            } else if (player.hasPermission("rang.builder")) {
+                setScore("  §8» §1§lBuilder", 5);
+            } else if (player.hasPermission("rang.youtuberplus")) {
+                setScore("  §8» §5§lYou§f§lTuber§d§l+", 5);
+            } else if (player.hasPermission("rang.youtuber")) {
+                setScore("  §8» §5§lYou§f§lTuber", 5);
+            } else if (player.hasPermission("rang.enderhacker")) {
+                setScore("  §8» §3§lEnder§b§lHacker", 5);
+            } else if (player.hasPermission("rang.enderhero")) {
+                setScore("  §8» §3§lEnder§5§lHero", 5);
+            } else if (player.hasPermission("rang.enderking")) {
+                setScore("  §8» &3Ender§6§lKing", 5);
+            } else if (player.hasPermission("rang.spieler") || player.hasPermission("rang.default")) {
+                setScore("  §8» §7§lSpieler", 5);
+            }
         }
-        */
+
         setScore("§a", 4);
         setScore("§8● §7Deine Coins§8:", 3);
         setScore("  §8» §c" + CoinCore.getInstance().getApi().getCoins(player.getUniqueId()), 2);

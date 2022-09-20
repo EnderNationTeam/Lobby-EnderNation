@@ -44,37 +44,43 @@ public class LobbySwitcher implements Listener {
                     Inventory inventory = Bukkit.createInventory(null, InventoryType.HOPPER, "§8» §6§lLobby Wechsler");
                     fill(inventory);
 
-                    HashMap<Integer, ServiceInfoSnapshot> lobbyServer = getLobbyServers();
+                    try {
+                        // We can use cloudnet
+                        HashMap<Integer, ServiceInfoSnapshot> lobbyServer = getLobbyServers();
 
-                    int count = 0;
-                    for (int serviceNumber : lobbyServer.keySet()) {
-                        ServiceInfoSnapshot service = lobbyServer.get(serviceNumber);
-                        String name = service.getName();
+                        int count = 0;
+                        for (int serviceNumber : lobbyServer.keySet()) {
+                            ServiceInfoSnapshot service = lobbyServer.get(serviceNumber);
+                            String name = service.getName();
 
-                        // Count up because it is a new service
-                        count++;
+                            // Count up because it is a new service
+                            count++;
 
-                        // Only 3 Servers allowed
-                        if (count > 3) {
-                            player.sendMessage("§4Error! §7Only 3 Servers are allowed. Report it to an Administrator!");
-                            continue; // Skip this service
+                            // Only 3 Servers allowed
+                            if (count > 3) {
+                                player.sendMessage("§4Error! §7Only 3 Servers are allowed. Report it to an Administrator!");
+                                continue; // Skip this service
+                            }
+
+                            // get item
+                            ItemStack item = getItem(player, service);
+
+                            // get item meta
+                            ItemMeta itemMeta = item.getItemMeta();
+                            // Add to item server info (name)
+                            itemMeta.getPersistentDataContainer().set(NamespacedKey.fromString("server"), PersistentDataType.STRING, name);
+                            // set the server info into the item
+                            item.setItemMeta(itemMeta);
+
+                            // set the item to the inventory
+                            inventory.setItem(count, item);
                         }
 
-                        // get item
-                        ItemStack item = getItem(player, service);
-
-                        // get item meta
-                        ItemMeta itemMeta = item.getItemMeta();
-                        // Add to item server info (name)
-                        itemMeta.getPersistentDataContainer().set(NamespacedKey.fromString("server"), PersistentDataType.STRING, name);
-                        // set the server info into the item
-                        item.setItemMeta(itemMeta);
-
-                        // set the item to the inventory
-                        inventory.setItem(count, item);
+                        player.openInventory(inventory);
+                    } catch (ClassCastException ex) {
+                        // We cannot use cloudnet
+                        player.sendMessage("§cDas Item is deaktiviert!");
                     }
-
-                    player.openInventory(inventory);
                 }
             }
         } catch (Exception ex) {
