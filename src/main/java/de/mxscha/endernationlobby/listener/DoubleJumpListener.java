@@ -7,6 +7,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -15,10 +16,12 @@ import java.util.HashMap;
 
 public class DoubleJumpListener implements Listener {
 
-    private HashMap<Player, Double> onlyY;
+    private static HashMap<Player, Double> onlyY = new HashMap<>();;
 
-    public DoubleJumpListener() {
-        this.onlyY = new HashMap<>();
+    @EventHandler
+    public void cleanup(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+        onlyY.remove(player);
     }
 
     @EventHandler
@@ -26,8 +29,9 @@ public class DoubleJumpListener implements Listener {
         Player player = event.getPlayer();
 
         // if the player not creative
-        if(player.getGameMode().equals(GameMode.CREATIVE) || player.getGameMode().equals(GameMode.SPECTATOR))
-            return;
+        if(player.getGameMode().equals(GameMode.CREATIVE) || player.getGameMode().equals(GameMode.SPECTATOR)) return;
+        // if player not flying
+        if(FlyListener.isFly(player)) return;
 
         event.setCancelled(true);
 

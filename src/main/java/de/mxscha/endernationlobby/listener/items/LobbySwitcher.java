@@ -39,9 +39,9 @@ public class LobbySwitcher implements Listener {
                     Inventory inventory = Bukkit.createInventory(null, InventoryType.HOPPER, "§8» §6§lLobby Wechsler");
                     fill(inventory);
 
-                    if(CloudNetManager.existCloudNet()) {
+                    if(!CloudNetManager.existCloudNet()) {
                         // We cannot use cloudnet
-                        player.sendMessage("§cDas Item is deaktiviert!");
+                        player.sendMessage("§cDas Item ist deaktiviert!");
                         return;
                     }
 
@@ -99,6 +99,7 @@ public class LobbySwitcher implements Listener {
                 // send player info
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 0.5f, 1);
                 player.sendMessage(MessageManager.Prefix + "§7Du wurdest zu §a§l" + serverName + " §7gesendet!");
+                player.closeInventory();
             }
         } catch (Exception e) {
 
@@ -107,7 +108,7 @@ public class LobbySwitcher implements Listener {
 
     private void fill(Inventory inventory) {
         for (int i = 0; i < inventory.getSize(); i++) {
-            inventory.setItem(i, new ItemCreator(Material.GRAY_STAINED_GLASS_PANE).setName("").toItemStack());
+            inventory.setItem(i, new ItemCreator(Material.GRAY_STAINED_GLASS_PANE).setName("§r").toItemStack());
         }
     }
 }

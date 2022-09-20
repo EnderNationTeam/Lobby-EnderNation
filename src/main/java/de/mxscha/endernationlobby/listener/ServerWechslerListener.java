@@ -38,6 +38,7 @@ public class ServerWechslerListener implements Listener {
             if (!event.getCurrentItem().hasItemMeta()) return;
             if (event.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §6§lServer Wechsler")) {
                 event.setCancelled(true);
+
                 Inventory inventory = Bukkit.createInventory(null, 9 * 6, "§8» §6§lServer Wechsler");
                 fill(inventory);
 
