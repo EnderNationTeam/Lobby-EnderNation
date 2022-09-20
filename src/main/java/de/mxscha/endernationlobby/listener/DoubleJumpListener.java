@@ -11,13 +11,15 @@ import org.bukkit.event.player.PlayerToggleFlightEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DoubleJumpListener implements Listener {
 
-    private static ArrayList<Player> backlist = new ArrayList<>();
-    private static HashMap<Player, Double> onlyY = new HashMap<>();
+    private HashMap<Player, Double> onlyY;
+
+    public DoubleJumpListener() {
+        this.onlyY = new HashMap<>();
+    }
 
     @EventHandler
     public void onJump(PlayerToggleFlightEvent event) {
@@ -27,19 +29,16 @@ public class DoubleJumpListener implements Listener {
         if(player.getGameMode().equals(GameMode.CREATIVE) || player.getGameMode().equals(GameMode.SPECTATOR))
             return;
 
-        // if the player not blacklisted
-        if(backlist.contains(player))
-            return;
-
         event.setCancelled(true);
 
         player.setVelocity(player.getLocation().getDirection().multiply(1).setY(1));
-
         player.playSound(player.getLocation(), Sound.ENTITY_CAT_HISS, 40, 10);
 
-        player.setAllowFlight(false);
-        backlist.add(player);
+        addCooldownAndEffect(player);
 
+    }
+
+    private void addCooldownAndEffect(Player player) {
         // add effect
         onlyY.put(player, player.getLocation().getY());
         BukkitTask bukkitTask = new BukkitRunnable() {
@@ -53,13 +52,13 @@ public class DoubleJumpListener implements Listener {
             }
         }.runTaskTimer(LobbyCore.getInstance(), 1, 1);
 
-        // reset all
+        // fly allow and stop bukkit Task
+        player.setAllowFlight(false);
         new BukkitRunnable() {
             @Override
             public void run() {
                 bukkitTask.cancel();
                 player.setAllowFlight(true);
-                backlist.remove(player);
             }
         }.runTaskLater(LobbyCore.getInstance(), 28);
     }
