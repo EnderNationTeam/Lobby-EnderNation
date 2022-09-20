@@ -14,8 +14,11 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.util.HashMap;
+
 public class PlayerConnectionListener implements Listener {
 
+    private HashMap<Player, LobbyScoreboard> playerLobbyScoreboard = new HashMap<>();
     @EventHandler
     public void onLogin(PlayerLoginEvent event) {
         Player player = event.getPlayer();
@@ -33,13 +36,13 @@ public class PlayerConnectionListener implements Listener {
         }
         event.setJoinMessage(null);
         InventoryManager.setPlayerInventory(player);
-        new LobbyScoreboard(player);
+        playerLobbyScoreboard.put(player, new LobbyScoreboard(player));
         player.setGameMode(GameMode.SURVIVAL);
         if (player.hasPermission("lobby.team")) {
             InventoryManager.addAdminItems(player);
         }
 
-        // Keksgauner double jump
+        // double jump
         player.setAllowFlight(true);
     }
 
@@ -47,5 +50,8 @@ public class PlayerConnectionListener implements Listener {
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         event.setQuitMessage(null);
+        // SCB cleanup
+        playerLobbyScoreboard.get(player).clean();
+        playerLobbyScoreboard.remove(player);
     }
 }

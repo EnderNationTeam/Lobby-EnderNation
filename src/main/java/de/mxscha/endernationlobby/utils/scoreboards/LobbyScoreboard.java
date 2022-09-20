@@ -4,14 +4,18 @@ import de.dytanic.cloudnet.driver.CloudNetDriver;
 import de.dytanic.cloudnet.driver.permission.IPermissionGroup;
 import de.dytanic.cloudnet.driver.permission.IPermissionUser;
 import de.mxscha.coinsystem.CoinCore;
+import de.mxscha.endernationlobby.LobbyCore;
 import de.mxscha.endernationlobby.utils.manager.CloudNetManager;
 import de.mxscha.endernationlobby.utils.scoreboards.tablist.TablistManager;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 public class LobbyScoreboard extends ScoreboardBuilder {
 
     private int id;
+    private BukkitTask bukkitTask;
 
     public LobbyScoreboard(Player player) {
         super(player, "        §3§lEnder§b§lNation          ");
@@ -74,6 +78,15 @@ public class LobbyScoreboard extends ScoreboardBuilder {
     }
 
     public void update() {
+        bukkitTask = new BukkitRunnable() {
+            @Override
+            public void run() {
+                createScoreboard();
+            }
+        }.runTaskTimer(LobbyCore.getInstance(), 20,20);
+    }
 
+    public void clean() {
+        bukkitTask.cancel();
     }
 }

@@ -23,11 +23,14 @@ public abstract class ScoreboardBuilder {
         this.objective = this.scoreboard.registerNewObjective("display", "dummy", displayName);
         this.objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         createScoreboard();
+        update();
     }
 
     public abstract void createScoreboard();
 
     public abstract void update();
+
+    public abstract void clean();
 
     public void setDisplayName(String displayName) {
         this.objective.setDisplayName(displayName);
