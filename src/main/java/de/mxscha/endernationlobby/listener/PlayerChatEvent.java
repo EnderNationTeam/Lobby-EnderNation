@@ -3,6 +3,7 @@ package de.mxscha.endernationlobby.listener;
 import de.dytanic.cloudnet.driver.CloudNetDriver;
 import de.dytanic.cloudnet.driver.permission.IPermissionGroup;
 import de.dytanic.cloudnet.driver.permission.IPermissionUser;
+import de.mxscha.endernationlobby.utils.manager.CloudNetManager;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -28,13 +29,13 @@ public class PlayerChatEvent implements Listener {
             return;
         }
 
-        try {
+        if(CloudNetManager.existCloudNet()) {
             // We can use Cloudnet
             IPermissionGroup group = CloudNetDriver.getInstance().getPermissionManagement().getHighestPermissionGroup(user);
 
             event.setFormat(ChatColor.translateAlternateColorCodes('&', group.getPrefix()) + "§8» §7" + player.getName() + "§8: §7" + msg);
 
-        } catch (ClassCastException ex) {
+        } else {
             // We cannot use cloudnet
             if (player.hasPermission("rang.owner")) {
                 event.setFormat("§4§lOwner §8» §7" + player.getName() + "§8: §f" + msg);

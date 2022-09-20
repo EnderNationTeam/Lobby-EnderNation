@@ -4,6 +4,7 @@ import de.dytanic.cloudnet.driver.CloudNetDriver;
 import de.dytanic.cloudnet.driver.permission.IPermissionGroup;
 import de.dytanic.cloudnet.driver.permission.IPermissionUser;
 import de.mxscha.coinsystem.CoinCore;
+import de.mxscha.endernationlobby.utils.manager.CloudNetManager;
 import de.mxscha.endernationlobby.utils.scoreboards.tablist.TablistManager;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -28,12 +29,12 @@ public class LobbyScoreboard extends ScoreboardBuilder {
         if (user == null) {
             return;
         }
-        try {
+        if(CloudNetManager.existCloudNet()) {
             // We can use cloudnet
             IPermissionGroup group = CloudNetDriver.getInstance().getPermissionManagement().getHighestPermissionGroup(user);
 
             setScore("  §8» " + ChatColor.translateAlternateColorCodes('&', group.getPrefix()), 5);
-        } catch (ClassCastException ex) {
+        } else {
             // We cannot use cloudnet
             if (player.hasPermission("rang.owner")) {
                 setScore("  §8» §4§lOwner", 5);
