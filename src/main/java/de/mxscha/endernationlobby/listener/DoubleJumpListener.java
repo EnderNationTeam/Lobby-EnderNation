@@ -31,7 +31,7 @@ public class DoubleJumpListener implements Listener {
         // if the player not creative
         if(player.getGameMode().equals(GameMode.CREATIVE) || player.getGameMode().equals(GameMode.SPECTATOR)) return;
         // if player not flying
-        if(FlyListener.isFly(player)) return;
+        if(FlyListener.isPlayerFly(player)) return;
 
         event.setCancelled(true);
 

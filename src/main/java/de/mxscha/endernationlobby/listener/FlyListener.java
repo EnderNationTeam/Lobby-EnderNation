@@ -19,8 +19,8 @@ public class FlyListener implements Listener {
 
     private static ArrayList<Player> isFly = new ArrayList<>();;
 
-    public static boolean isFly(Player player) {
-        if(isFly(player))
+    public static boolean isPlayerFly(Player player) {
+        if(isFly.contains(player))
             return true;
         return false;
     }
@@ -36,21 +36,25 @@ public class FlyListener implements Listener {
         Player player = (Player) event.getWhoClicked();
         if (event.getCurrentItem() == null) return;
         if (!event.getCurrentItem().hasItemMeta()) return;
-        if(!event.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §9§lFliegen §8| §cDeaktiviert") ||
-                !event.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §9§lFliegen §8| §aAktiviert")) return;
 
-        if (isFly.contains(player)) {
-            player.setAllowFlight(false);
-            player.setFlying(false);
-            player.getInventory().setItem(21, flyModeD);
-            player.closeInventory();
-            player.sendMessage(MessageManager.Prefix + "§7Du kannst nun §cnicht mehr §7fliegen!");
-        } else {
-            player.setAllowFlight(true);
-            player.setFlying(true);
-            player.getInventory().setItem(21, flyModeA);
-            player.closeInventory();
-            player.sendMessage(MessageManager.Prefix + "§7Du kannst §anun §7fliegen!");
+        if(event.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §9§lFliegen §8| §cDeaktiviert") ||
+                event.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §9§lFliegen §8| §aAktiviert")) {
+
+            if (isFly.contains(player)) {
+                isFly.remove(player);
+                //player.setAllowFlight(false);
+                player.setFlying(false);
+                player.getInventory().setItem(21, flyModeD);
+                player.closeInventory();
+                player.sendMessage(MessageManager.Prefix + "§7Du kannst nun §cnicht mehr §7fliegen!");
+            } else {
+                isFly.add(player);
+                player.setAllowFlight(true);
+                player.setFlying(true);
+                player.getInventory().setItem(21, flyModeA);
+                player.closeInventory();
+                player.sendMessage(MessageManager.Prefix + "§7Du kannst §anun §7fliegen!");
+            }
         }
     }
 }
