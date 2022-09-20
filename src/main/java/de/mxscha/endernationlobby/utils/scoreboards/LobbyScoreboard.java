@@ -84,9 +84,11 @@ public class LobbyScoreboard extends ScoreboardBuilder {
                 createScoreboard();
             }
         }.runTaskTimer(LobbyCore.getInstance(), 20,20);
+        LobbyCore.getInstance().getLogger().info("Starting scoreboard Task: " + bukkitTask.getTaskId());
     }
 
     public void clean() {
+        LobbyCore.getInstance().getLogger().info("Stopping scoreboard Task: " + bukkitTask.getTaskId());
         bukkitTask.cancel();
     }
 }

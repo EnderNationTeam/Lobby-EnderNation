@@ -63,7 +63,7 @@ public class LobbySwitcher implements Listener {
                         }
 
                         // get item
-                        ItemStack item = CloudNetManager.addItemServiceMeta(name, CloudNetManager.getItem(player, service));
+                        ItemStack item = CloudNetManager.addItemServiceMeta("server", name, CloudNetManager.getGroupItem(player, service));
 
                         // set the item to the inventory
                         inventory.setItem(count, item);
@@ -90,6 +90,13 @@ public class LobbySwitcher implements Listener {
                 String serverName = ChatColor.stripColor(itemMeta.getDisplayName());
                 // get server info inside the item
                 String server = itemMeta.getPersistentDataContainer().get(NamespacedKey.fromString("server"), PersistentDataType.STRING);
+
+                // Catch if this null
+                if(server == null) {
+                    player.sendMessage("§4Error! §7Ich kann den Server nicht finden. Report it to an Administrator!");
+                    return;
+                }
+
                 // send to server
                 ByteArrayDataOutput out;
                 out = ByteStreams.newDataOutput();
