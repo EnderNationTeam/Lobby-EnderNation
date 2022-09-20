@@ -26,7 +26,7 @@ public class InventoryManager {
         inventory.clear();
         inventory.setItem(0, compass);
         inventory.setItem(1, playerHide);
-        inventory.setItem(4, extras);
+        //inventory.setItem(4, extras);
         inventory.setItem(7, switcher);
         inventory.setItem(8, new ItemCreator(Material.PLAYER_HEAD)
                 .setSkull("§8» §a§lProfil",
