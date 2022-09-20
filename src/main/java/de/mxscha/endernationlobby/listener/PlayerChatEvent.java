@@ -34,7 +34,6 @@ public class PlayerChatEvent implements Listener {
             IPermissionGroup group = CloudNetDriver.getInstance().getPermissionManagement().getHighestPermissionGroup(user);
 
             event.setFormat(ChatColor.translateAlternateColorCodes('&', group.getPrefix()) + "§8» §7" + player.getName() + "§8: §7" + msg);
-
         } else {
             // We cannot use cloudnet
             if (player.hasPermission("rang.owner")) {

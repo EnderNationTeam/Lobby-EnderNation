@@ -18,6 +18,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 
 public class Compass implements Listener {
 
@@ -37,6 +38,7 @@ public class Compass implements Listener {
                     int eofPlayerCount = PluginMessagesListener.getPlayerCountEndOfLife();
                     inventory.setItem(22, new ItemCreator(Material.MAGMA_CREAM)
                             .addEnchantment(Enchantment.KNOCKBACK,1,true)
+                            .addItemFlag(ItemFlag.HIDE_ENCHANTS)
                             .setName("§8» §6§lSpawn")
                             .setLore("§8● §7Klicke um dich zum §6§lSpawn §7zu teleportieren!")
                             .toItemStack());

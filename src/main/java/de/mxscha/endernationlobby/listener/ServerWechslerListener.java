@@ -193,7 +193,7 @@ public class ServerWechslerListener implements Listener {
 
     private void fill(Inventory inventory) {
         for (int i = 0; i < inventory.getSize(); i++) {
-            inventory.setItem(i, new ItemCreator(Material.GRAY_STAINED_GLASS_PANE).setName("").toItemStack());
+            inventory.setItem(i, new ItemCreator(Material.GRAY_STAINED_GLASS_PANE).setName("§r").toItemStack());
         }
     }
 }
