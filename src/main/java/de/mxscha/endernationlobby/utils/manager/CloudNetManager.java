@@ -49,20 +49,6 @@ public class CloudNetManager {
                 // NoSuchElementException – if no value is present
             }
         }
-
-        // fake groups for testing
-        groups.add("FakeGroup1");
-        groups.add("FakeGroup2");
-        groups.add("FakeGroup3");
-        groups.add("FakeGroup4");
-        groups.add("FakeGroup5");
-        groups.add("FakeGroup6");
-        groups.add("FakeGroup7");
-        groups.add("FakeGroup8");
-        groups.add("FakeGroup9");
-        groups.add("FakeGroup10");
-        groups.add("FakeGroup11");
-        groups.add("FakeGroup12");
         return groups;
     }
 
@@ -195,6 +181,8 @@ public class CloudNetManager {
 
             // Filter proxy group
             if(group.equals("Proxy")) continue;
+
+            if(CloudNetManager.getServiceServers(group).size() == 0) continue;
 
             // get item
             ItemStack item = CloudNetManager.addItemPersistentMeta("group", group, CloudNetManager.getGroupItem(player, group));
