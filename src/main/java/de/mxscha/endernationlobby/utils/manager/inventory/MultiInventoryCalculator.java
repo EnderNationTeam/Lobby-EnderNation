@@ -1,10 +1,10 @@
 package de.mxscha.endernationlobby.utils.manager.inventory;
 
-import de.mxscha.endernationlobby.utils.manager.items.ItemCreator;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.ArrayList;
 
 /**
  * @author KeksGauner
@@ -12,19 +12,31 @@ import org.bukkit.inventory.ItemStack;
 public class MultiInventoryCalculator {
 
     private final Inventory inventory;
+    private final ArrayList<ItemStack> itemStacks;
     private int current;
+    private int page;
 
-    public MultiInventoryCalculator(int size, String title) {
-        this.inventory = new InventoryBuilder().setSize(size).setTitle(title).setFillMaterial(Material.GRAY_STAINED_GLASS_PANE, "§r").build();
-        this.current = 0;
-    }
 
-    public MultiInventoryCalculator(int size, String title, int startPoint) {
+    public MultiInventoryCalculator(int size, String title, int startPoint, ArrayList<ItemStack> itemStacks) {
         this.inventory = new InventoryBuilder().setSize(size).setTitle(title).setFillMaterial(Material.GRAY_STAINED_GLASS_PANE, "§r").build();
+        this.itemStacks = itemStacks;
         this.current = startPoint;
+        this.page = 0;
     }
 
-    public void addItem(ItemStack itemStack) {
+    public void show(int page) {
+        this.page = page;
+        setNoPage();
+        // If this not the first page. give a previous back
+        if(page != 0)
+            setPreviousItem();
+
+        for(ItemStack itemStack : itemStacks)
+            // set the item to the inventory
+            addItem(itemStack);
+    }
+
+    private void addItem(ItemStack itemStack) {
 
         // Check if it able to add the item
         if(isFull()) {
@@ -34,10 +46,10 @@ public class MultiInventoryCalculator {
         setItem(current, itemStack);
         this.current++;
 
-        checkLastItem();
+        checkNextItem();
     }
 
-    public void setItem(int i, ItemStack itemStack) {
+    private void setItem(int i, ItemStack itemStack) {
         this.inventory.setItem(i, itemStack);
     }
 
@@ -49,13 +61,21 @@ public class MultiInventoryCalculator {
         return this.current > this.inventory.getSize() - 2;
     }
 
-    private void checkLastItem() {
+    private void setNoPage() {
+        // set no page on both sites
+        setItem(0, MultiInventoryItems.getFirstNoPageSite());
+        setItem(this.inventory.getSize() - 1, MultiInventoryItems.getLastNoPageSite());
+    }
+
+    private void checkNextItem() {
         // Check is it the last item
         if(isFull()) {
-            ItemStack itemStack = new ItemCreator(Material.RED_STAINED_GLASS_PANE)
-                    .setName("§3" + "Next Page")
-                    .toItemStack();
-            setItem(current, itemStack);
+            setItem(current, MultiInventoryItems.setPage(page + 1, MultiInventoryItems.getNextPage()));
         }
+    }
+
+    private void setPreviousItem() {
+        // set fist item
+        setItem(0, MultiInventoryItems.setPage(page - 1, MultiInventoryItems.getPreviousPage()));
     }
 }

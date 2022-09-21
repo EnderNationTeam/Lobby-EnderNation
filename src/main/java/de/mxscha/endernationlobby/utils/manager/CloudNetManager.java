@@ -1,10 +1,13 @@
 package de.mxscha.endernationlobby.utils.manager;
 
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import de.dytanic.cloudnet.driver.service.ServiceInfoSnapshot;
 import de.dytanic.cloudnet.ext.bridge.BridgeServiceProperty;
 import de.dytanic.cloudnet.ext.bridge.player.ServicePlayer;
 import de.dytanic.cloudnet.wrapper.Wrapper;
 import de.dytanic.cloudnet.wrapper.provider.service.WrapperGeneralCloudServiceProvider;
+import de.mxscha.endernationlobby.LobbyCore;
 import de.mxscha.endernationlobby.utils.manager.items.ItemCreator;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -185,7 +188,22 @@ public class CloudNetManager {
                 .toItemStack();
     }
 
-    public static ItemStack addItemServiceMeta(String key, String value, ItemStack item) {
+    public static ArrayList<ItemStack> getGroupItemStackArray(Player player) {
+        ArrayList<ItemStack> itemStacks = new ArrayList<>();
+        ArrayList<String> groups = CloudNetManager.getServiceGroups();
+        for (String group : groups) {
+
+            // Filter proxy group
+            if(group.equals("Proxy")) continue;
+
+            // get item
+            ItemStack item = CloudNetManager.addItemPersistentMeta("group", group, CloudNetManager.getGroupItem(player, group));
+            itemStacks.add(item);
+        }
+        return itemStacks;
+    }
+
+    public static ItemStack addItemPersistentMeta(String key, String value, ItemStack item) {
         // get item meta
         ItemMeta itemMeta = item.getItemMeta();
         // Add to item server info (name)
@@ -193,5 +211,20 @@ public class CloudNetManager {
         // set the server info into the item
         item.setItemMeta(itemMeta);
         return item;
+    }
+
+    public static String getItemPersistentMeta(String key, ItemStack item) {
+        // get item meta
+        ItemMeta itemMeta = item.getItemMeta();
+        return itemMeta.getPersistentDataContainer().get(NamespacedKey.fromString(key), PersistentDataType.STRING);
+    }
+
+    public static void sendServer(Player player, String server) {
+        // send to server
+        ByteArrayDataOutput out;
+        out = ByteStreams.newDataOutput();
+        out.writeUTF("Connect");
+        out.writeUTF(server);
+        player.sendPluginMessage(LobbyCore.getInstance(), "BungeeCord", out.toByteArray());
     }
 }

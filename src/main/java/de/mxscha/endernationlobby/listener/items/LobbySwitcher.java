@@ -1,16 +1,12 @@
 package de.mxscha.endernationlobby.listener.items;
 
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
 import de.dytanic.cloudnet.driver.service.ServiceInfoSnapshot;
-import de.mxscha.endernationlobby.LobbyCore;
 import de.mxscha.endernationlobby.utils.manager.CloudNetManager;
 import de.mxscha.endernationlobby.utils.manager.MessageManager;
 import de.mxscha.endernationlobby.utils.manager.items.ItemCreator;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,7 +18,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
 
 import java.util.HashMap;
 
@@ -63,7 +58,7 @@ public class LobbySwitcher implements Listener {
                         }
 
                         // get item
-                        ItemStack item = CloudNetManager.addItemServiceMeta("server", name, CloudNetManager.getGroupItem(player, service));
+                        ItemStack item = CloudNetManager.addItemPersistentMeta("server", name, CloudNetManager.getGroupItem(player, service));
 
                         // set the item to the inventory
                         inventory.setItem(count, item);
@@ -89,7 +84,7 @@ public class LobbySwitcher implements Listener {
                 // get name without colors
                 String serverName = ChatColor.stripColor(itemMeta.getDisplayName());
                 // get server info inside the item
-                String server = itemMeta.getPersistentDataContainer().get(NamespacedKey.fromString("server"), PersistentDataType.STRING);
+                String server = CloudNetManager.getItemPersistentMeta("server", itemStack);
 
                 // Catch if this null
                 if(server == null) {
@@ -97,12 +92,8 @@ public class LobbySwitcher implements Listener {
                     return;
                 }
 
-                // send to server
-                ByteArrayDataOutput out;
-                out = ByteStreams.newDataOutput();
-                out.writeUTF("Connect");
-                out.writeUTF(server);
-                player.sendPluginMessage(LobbyCore.getInstance(), "BungeeCord", out.toByteArray());
+                CloudNetManager.sendServer(player, server);
+
                 // send player info
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 0.5f, 1);
                 player.sendMessage(MessageManager.Prefix + "§7Du wurdest zu §a§l" + serverName + " §7gesendet!");
