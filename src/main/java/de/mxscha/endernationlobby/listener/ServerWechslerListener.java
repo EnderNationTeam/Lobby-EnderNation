@@ -1,26 +1,12 @@
 package de.mxscha.endernationlobby.listener;
 
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
-import de.dytanic.cloudnet.driver.service.ServiceInfoSnapshot;
-import de.mxscha.endernationlobby.LobbyCore;
 import de.mxscha.endernationlobby.utils.manager.CloudNetManager;
-import de.mxscha.endernationlobby.utils.manager.MessageManager;
-import de.mxscha.endernationlobby.utils.manager.inventory.InventoryCalculator;
-import de.mxscha.endernationlobby.utils.manager.items.ItemCreator;
-import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.Sound;
+import de.mxscha.endernationlobby.utils.manager.inventory.MultiInventoryCalculator;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 
@@ -36,7 +22,7 @@ public class ServerWechslerListener implements Listener {
             if (event.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §6§lServer Wechsler")) {
                 event.setCancelled(true);
 
-                InventoryCalculator inventory = new InventoryCalculator(9 * 1, "§8» §6§lServer Wechsler", 1);
+                MultiInventoryCalculator inventory = new MultiInventoryCalculator(9 * 1, "§8» §6§lServer Wechsler", 1);
 
                 if(!CloudNetManager.existCloudNet()) {
                     // We cannot use cloudnet
@@ -62,6 +48,7 @@ public class ServerWechslerListener implements Listener {
             }
 
             if (event.getView().getTitle().equals("§8» §6§lServer Wechsler")) {
+                player.sendMessage("§cDas Item ist deaktiviert!");
                 player.closeInventory();
             }
         } catch (Exception ex) {
