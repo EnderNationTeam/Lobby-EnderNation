@@ -5,6 +5,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author KeksGauner
@@ -31,9 +33,11 @@ public class MultiInventoryCalculator {
         if(page != 0)
             setPreviousItem();
 
-        for(ItemStack itemStack : itemStacks)
+        List<Integer> calculateItems = getStartStop(page, this.itemStacks.size(), 7); // 7 beacuse the inventory have max 9 - 2
+        for (int current = calculateItems.get(0); current < calculateItems.get(1); current++) {
             // set the item to the inventory
-            addItem(itemStack);
+            addItem(itemStacks.get(current));
+        }
     }
 
     private void addItem(ItemStack itemStack) {
@@ -77,5 +81,22 @@ public class MultiInventoryCalculator {
     private void setPreviousItem() {
         // set fist item
         setItem(0, MultiInventoryItems.setPage(page - 1, MultiInventoryItems.getPreviousPage()));
+    }
+
+    // From https://github.com/CookieLeaks/Minecraft-Showcase/blob/b75344ded06855a264efebbc1d1057e75df5ee79/src/main/java/showcase/utils/ListManager.java
+    public static List<Integer> getStartStop(int seite, int length, int max) {
+        int start = 0;
+        int stop = 0;
+        if(9 <= length) {
+            start = seite * max;
+            stop = (seite + 1) * max;
+            if(stop >= length) {
+                stop = length;
+            }
+        } else {
+            start = 0;
+            stop = length;
+        }
+        return Arrays.asList(start, stop);
     }
 }

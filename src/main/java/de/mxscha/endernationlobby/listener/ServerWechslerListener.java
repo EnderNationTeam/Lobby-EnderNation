@@ -60,7 +60,6 @@ public class ServerWechslerListener implements Listener {
                     ArrayList<ItemStack> itemStacks = CloudNetManager.getGroupItemStackArray(player);
                     MultiInventoryCalculator inventory = new MultiInventoryCalculator(9 * 1, "§8» §6§lServer Wechsler", 1, itemStacks);
                     inventory.show(Integer.valueOf(CloudNetManager.getItemPersistentMeta("page", itemStack)));
-                    player.sendMessage("Your Page: " + Integer.valueOf(CloudNetManager.getItemPersistentMeta("page", itemStack)));
                     player.openInventory(inventory.build());
                     return;
                 }
