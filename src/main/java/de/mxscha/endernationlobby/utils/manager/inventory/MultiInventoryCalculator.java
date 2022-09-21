@@ -34,10 +34,9 @@ public class MultiInventoryCalculator {
             setPreviousItem();
 
         List<Integer> calculateItems = getStartStop(page, this.itemStacks.size(), 7); // 7 beacuse the inventory have max 9 - 2
-        for (int current = calculateItems.get(0); current < calculateItems.get(1); current++) {
+        for (int current = calculateItems.get(0); current < calculateItems.get(1); current++)
             // set the item to the inventory
             addItem(itemStacks.get(current));
-        }
     }
 
     private void addItem(ItemStack itemStack) {
