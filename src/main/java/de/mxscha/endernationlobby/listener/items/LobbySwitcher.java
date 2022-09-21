@@ -58,7 +58,7 @@ public class LobbySwitcher implements Listener {
                         }
 
                         // get item
-                        ItemStack item = CloudNetManager.addItemPersistentMeta("server", name, CloudNetManager.getGroupItem(player, service));
+                        ItemStack item = CloudNetManager.addItemPersistentMeta("server", name, CloudNetManager.getServiceItem(player, service));
 
                         // set the item to the inventory
                         inventory.setItem(count, item);

@@ -87,7 +87,7 @@ public class ServerWechslerListener implements Listener {
                     String name = service.getName();
 
                     // get item
-                    ItemStack item = CloudNetManager.addItemPersistentMeta("server", name, CloudNetManager.getGroupItem(player, service));
+                    ItemStack item = CloudNetManager.addItemPersistentMeta("server", name, CloudNetManager.getServiceItem(player, service));
 
                     itemStacks.add(item);
                 }

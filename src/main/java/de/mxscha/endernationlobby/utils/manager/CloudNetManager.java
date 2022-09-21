@@ -76,7 +76,7 @@ public class CloudNetManager {
         return false; // no there is no player
     }
 
-    public static ItemStack getGroupItem(Player player, ServiceInfoSnapshot service) {
+    public static ItemStack getServiceItem(Player player, ServiceInfoSnapshot service) {
         String name = service.getName().replaceAll("-", " ");
         int currentPlayers = service.getProperty(BridgeServiceProperty.ONLINE_COUNT).get();
         int maxPlayers = service.getProperty(BridgeServiceProperty.MAX_PLAYERS).get();
@@ -127,47 +127,10 @@ public class CloudNetManager {
 
     public static ItemStack getGroupItem(Player player, String group) {
         String name = group.replaceAll("-", " ");
-        int currentPlayers = 0;
-        int maxPlayers = 0;
-        boolean isFull = false;
-        boolean isEmpty = false;
-        boolean isPlayerOnline = false;
+        int currentPlayers = -1;
+        int maxPlayers = -1;
 
-        /* What to do:
-         * Player Joined Glowestone
-         * If service online Sugar
-         * If service full Redstone
-         */
-
-        // 1. is the player on this server?
-        if(isPlayerOnline) {
-            // The Player is on this server && send normal Info
-            return new ItemCreator(Material.GLOWSTONE_DUST)
-                    .setName("§e" + name)
-                    .setLore("§7Spieler§8: §a" + currentPlayers + "§7/§c" + maxPlayers)
-                    .toItemStack();
-        }
-
-        // 2. is the service full?
-        if(isFull) {
-            // Full
-            return new ItemCreator(Material.REDSTONE)
-                    .setName("§c" + name)
-                    .setLore("§cServer Voll")
-                    .toItemStack();
-        }
-
-        // 3. is the service empty?
-        if(isEmpty) {
-            // Empty
-            return new ItemCreator(Material.SUGAR)
-                    .setName("§e" + name)
-                    .setLore("§7Leer")
-                    .toItemStack();
-        }
-
-        // 4. Send normal server info
-        // Normal server info
+        // Normal group info
         return new ItemCreator(Material.SUGAR)
                 .setName("§e" + name)
                 .setLore("§7Spieler§8: §a" + currentPlayers + "§7/§c" + maxPlayers)
