@@ -3,7 +3,6 @@ package de.mxscha.endernationlobby.utils.scoreboards;
 import de.dytanic.cloudnet.driver.CloudNetDriver;
 import de.dytanic.cloudnet.driver.permission.IPermissionGroup;
 import de.dytanic.cloudnet.driver.permission.IPermissionUser;
-import de.mxscha.coinsystem.CoinCore;
 import de.mxscha.endernationlobby.LobbyCore;
 import de.mxscha.endernationlobby.utils.manager.CloudNetManager;
 import de.mxscha.endernationlobby.utils.scoreboards.tablist.TablistManager;
@@ -73,7 +72,8 @@ public class LobbyScoreboard extends ScoreboardBuilder {
 
         setScore("§a", 4);
         setScore("§8● §7Deine Coins§8:", 3);
-        setScore("  §8» §c" + CoinCore.getInstance().getApi().getCoins(player.getUniqueId()), 2);
+        setScore("  §8» §c" + "Keine Coins :(", 2);
+        // setScore("  §8» §c" + CoinCore.getInstance().getApi().getCoins(player.getUniqueId()), 2);
         setScore("§a§8§m                               ", 1);
     }
 
