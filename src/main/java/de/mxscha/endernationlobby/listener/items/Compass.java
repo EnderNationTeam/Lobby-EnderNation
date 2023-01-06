@@ -36,6 +36,7 @@ public class Compass implements Listener {
                     out.writeUTF("EndOfLife-1");
                     player.sendPluginMessage(LobbyCore.getInstance(), "BungeeCord", out.toByteArray());
                     int eofPlayerCount = PluginMessagesListener.getPlayerCountEndOfLife();
+
                     inventory.setItem(22, new ItemCreator(Material.MAGMA_CREAM)
                             .addEnchantment(Enchantment.KNOCKBACK,1,true)
                             .addItemFlag(ItemFlag.HIDE_ENCHANTS)
@@ -46,6 +47,18 @@ public class Compass implements Listener {
                             .setName("§8» §9§lEnd§f§lOf§a§lLife")
                             .setLore("§8● §7Spieler Online§8: §b" + eofPlayerCount, "","§8● §7Klicke um dich zu §9§lEnd§f§lOf§a§lLife §7zu teleportieren!")
                             .toItemStack());
+                    // ADDED Keksgamer
+                    inventory.setItem(5, new ItemCreator(Material.RED_STAINED_GLASS_PANE)
+                            .setName("§c§lIn Arbeit!")
+                            .toItemStack());
+                    inventory.setItem(10, new ItemCreator(Material.RED_STAINED_GLASS_PANE)
+                            .setName("§c§lIn Arbeit!")
+                            .toItemStack());
+                    inventory.setItem(16, new ItemCreator(Material.RED_STAINED_GLASS_PANE)
+                            .setName("§c§lIn Arbeit!")
+                            .toItemStack());
+                    // ADDED END Keksgamer
+                    /*
                     inventory.setItem(5, new ItemCreator(Material.IRON_SWORD)
                             .setName("§8» §c§lMurder Mystery")
                             .setLore("§8● §7Klicke um dich zu §c§lMurder Mystery §7zu teleportieren!")
@@ -58,6 +71,7 @@ public class Compass implements Listener {
                             .setName("§8» §b§lSmash")
                             .setLore("§8● §7Klicke um dich zu §b§lSmash §7zu teleportieren!")
                             .toItemStack());
+                    */
                     inventory.setItem(28, new ItemCreator(Material.RED_STAINED_GLASS_PANE)
                             .setName("§c§lIn Arbeit!")
                             .toItemStack());
