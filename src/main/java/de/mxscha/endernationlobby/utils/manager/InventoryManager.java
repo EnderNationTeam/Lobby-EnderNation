@@ -31,7 +31,7 @@ public class InventoryManager {
                         player,
                         "§7Lade Freunde in eine Party ein!")
                 .toItemStack());
-        player.setLevel(2022);
+        player.setLevel(2023);
         player.setExp(0);
         player.getInventory().setHeldItemSlot(0);
     }
