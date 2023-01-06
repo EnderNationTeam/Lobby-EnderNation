@@ -72,7 +72,7 @@ public class LobbyScoreboard extends ScoreboardBuilder {
 
         setScore("§a", 4);
         setScore("§8● §7Deine Coins§8:", 3);
-        setScore("  §8» §c" + "Keine Coins :(", 2);
+        setScore("  §8» §c" + "-/-", 2);
         // setScore("  §8» §c" + CoinCore.getInstance().getApi().getCoins(player.getUniqueId()), 2);
         setScore("§a§8§m                               ", 1);
     }
