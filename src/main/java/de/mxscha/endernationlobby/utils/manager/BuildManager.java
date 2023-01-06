@@ -24,6 +24,7 @@ public class BuildManager {
             InventoryManager.setPlayerInventory(player);
             player.setGameMode(GameMode.SURVIVAL);
         }
+        player.setAllowFlight(true);
     }
 
     public static boolean isAllowed(Player player) {
